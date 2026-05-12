@@ -1,0 +1,2236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meridian Solar Partners — Eficiencia comercial para instaladoras fotovoltaicas</title>
+    <meta name="description" content="Práctica especializada en eficiencia comercial para instaladoras fotovoltaicas. Diagnóstico operativo gratuito en Fase 0.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..600,30..100,0..1;1,9..144,300..600,30..100,0..1&family=IBM+Plex+Mono:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        /* ── RESET ── */
+        *, *::before, *::after { box-sizing: border-box; }
+        * { margin: 0; padding: 0; }
+        html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+        body {
+            background: #F5F5F2;
+            color: #0B2545;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            position: relative;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+        ul { list-style: none; }
+
+        /* Paper grain overlay */
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            pointer-events: none; z-index: 1;
+            opacity: 0.022; mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ── GRID ── */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            column-gap: 24px;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        @media (max-width: 768px) {
+            .grid { column-gap: 16px; padding: 0 24px; }
+        }
+
+        /* ── SECTION ── */
+        section[id] { scroll-margin-top: 90px; }
+        .section { padding: 130px 0; position: relative; }
+        .section + .section { border-top: 1px solid #C7CCD1; }
+        @media (max-width: 768px) {
+            .section { padding: 72px 0; }
+        }
+
+        /* ── TYPE TOKENS ── */
+        .t-mono {
+            font-family: 'IBM Plex Mono', ui-monospace, monospace;
+            font-weight: 400;
+        }
+        .t-display {
+            font-family: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+            font-weight: 400;
+            font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+        }
+
+        /* ── SECTION LABEL ── */
+        .section-label {
+            grid-column: 1 / -1;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #1F2937;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 56px;
+        }
+        .section-label::after {
+            content: '';
+            flex: 0 0 88px;
+            height: 1px;
+            background: #C7CCD1;
+        }
+
+        /* ── SECTION TITLE ── */
+        .section-title {
+            grid-column: 1 / 11;
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(2.25rem, 5.2vw, 4.5rem);
+            line-height: 1.02;
+            letter-spacing: -0.035em;
+            color: #0B2545;
+            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+            text-wrap: balance;
+            margin-top: 24px;
+            margin-bottom: 56px;
+        }
+        @media (max-width: 768px) {
+            .section-title { grid-column: 1 / -1; }
+            .section-label { margin-bottom: 36px; }
+        }
+
+        /* ── MARGINALIA ── */
+        .marginalia {
+            grid-column: 10 / -1;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 300;
+            font-size: 0.6875rem;
+            line-height: 1.78;
+            color: #1F2937;
+            border-left: 1px solid #C7CCD1;
+            padding-left: 18px;
+            max-width: 240px;
+            font-feature-settings: 'kern';
+        }
+        .marginalia b, .marginalia strong { font-weight: 400; color: #0B2545; }
+        @media (max-width: 1024px) {
+            .marginalia {
+                grid-column: 1 / -1;
+                max-width: 460px;
+                margin-top: 36px;
+            }
+        }
+
+        /* ── REVEAL ANIMATION (spring-eased; JS-gated so no-JS users see content) ── */
+        .js-on .fu {
+            opacity: 0;
+            transform: translateY(22px);
+            transition:
+                opacity 900ms ease-out,
+                transform 1100ms cubic-bezier(0.34, 1.42, 0.42, 1);
+        }
+        .js-on .fu.in { opacity: 1; transform: translateY(0); }
+        .js-on .fu.d1 { transition-delay: 100ms; }
+        .js-on .fu.d2 { transition-delay: 200ms; }
+        .js-on .fu.d3 { transition-delay: 300ms; }
+        @media (prefers-reduced-motion: reduce) {
+            .fu, .fu.in, * { transition: none !important; animation: none !important; }
+            .fu { opacity: 1; transform: none; }
+        }
+
+        /* ── HEADER ── */
+        header {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(245,245,242,0.86);
+            backdrop-filter: saturate(180%) blur(18px);
+            -webkit-backdrop-filter: saturate(180%) blur(18px);
+            border-bottom: 1px solid #C7CCD1;
+        }
+        .nav-row {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+        @media (max-width: 768px) { .nav-row { padding: 16px 24px; } }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #0B2545;
+            white-space: nowrap;
+        }
+        .brand-mark {
+            width: 26px; height: 26px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 3px;
+            border: 1px solid #C7CCD1;
+            flex-shrink: 0;
+        }
+        .brand-name b { font-weight: 500; }
+        .brand-name em { font-style: normal; color: #1F2937; font-weight: 400; }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+        }
+        .nav-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #1F2937;
+            position: relative;
+            padding: 4px 0;
+            transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 1px;
+            background: #0B2545;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-links a:hover { color: #0B2545; }
+        .nav-links a:hover::after { transform: scaleX(1); }
+        @media (max-width: 1100px) { .nav-links { display: none; } }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 8px 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px; height: 1px;
+            background: #0B2545;
+            transition: transform 450ms cubic-bezier(0.34, 1.42, 0.42, 1), opacity 250ms;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        @media (max-width: 1100px) { .hamburger { display: flex; } }
+
+        .mobile-menu {
+            position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+            background: #F5F5F2;
+            padding: 40px;
+            z-index: 49;
+            opacity: 0; pointer-events: none;
+            transform: translateY(-12px);
+            transition: opacity 380ms ease, transform 480ms cubic-bezier(0.34, 1.42, 0.42, 1);
+            overflow-y: auto;
+        }
+        .mobile-menu.open { opacity: 1; pointer-events: auto; transform: none; }
+        .mobile-menu a {
+            display: block;
+            padding: 20px 0;
+            border-bottom: 1px solid #C7CCD1;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #0B2545;
+        }
+        .mobile-menu a:first-child { border-top: 1px solid #C7CCD1; }
+        @media (max-width: 768px) {
+            .mobile-menu { padding: 24px; }
+            .mobile-menu a { font-size: 0.75rem; padding: 18px 0; }
+        }
+
+        /* ── META STRIP ── */
+        .meta-strip {
+            border-bottom: 1px solid #C7CCD1;
+            padding: 14px 40px;
+            background: #F5F5F2;
+        }
+        .meta-strip-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #1F2937;
+        }
+        .meta-strip-inner > *:last-child { color: #0B2545; }
+        @media (max-width: 768px) {
+            .meta-strip { padding: 12px 24px; }
+            .meta-strip-inner { font-size: 0.625rem; letter-spacing: 0.14em; flex-wrap: wrap; gap: 8px 16px; }
+        }
+
+        /* ── PREFACE (Sobre la práctica) ── */
+        .section--preface { padding: 120px 0 100px; }
+        .preface-block { grid-column: 2 / 9; }
+        .preface-rule {
+            width: 120px;
+            height: 1px;
+            background: #C7CCD1;
+            margin-bottom: 28px;
+        }
+        .preface-block .section-label {
+            letter-spacing: 0.1em;
+            margin-bottom: 0;
+        }
+        .preface-block .section-label::after { display: none; }
+        .preface-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            color: #0B2545;
+            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+            margin-top: 28px;
+            margin-bottom: 48px;
+            text-wrap: balance;
+        }
+        .preface-body {
+            max-width: 620px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: #1F2937;
+        }
+        .preface-body p + p { margin-top: 1.6em; }
+        .preface-sign {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.04em;
+            color: #1F2937;
+        }
+        .preface-attribution {
+            margin-top: 32px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .operator-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #C7CCD1;
+            object-fit: cover;
+            display: block;
+            flex-shrink: 0;
+        }
+        .preface-attribution-text {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .operator-linkedin {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.04em;
+            color: #1F2937;
+            text-decoration: none;
+            border-bottom: 1px solid #C7CCD1;
+            padding-bottom: 2px;
+            align-self: flex-start;
+            transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+                        color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .operator-linkedin:hover {
+            border-bottom-color: #0B2545;
+            color: #0B2545;
+        }
+        @media (max-width: 1024px) { .preface-block { grid-column: 1 / 10; } }
+        @media (max-width: 768px) {
+            .section--preface { padding: 80px 0 64px; }
+            .preface-block { grid-column: 1 / -1; }
+            .preface-title { font-size: clamp(1.8rem, 6vw, 2.4rem); margin-bottom: 36px; margin-top: 24px; }
+        }
+
+        /* ── § 03 SISTEMA 360 HIGHLIGHT (inverted) ── */
+        .section--highlight {
+            background: #0B2545;
+            padding: 160px 0;
+            position: relative;
+        }
+        .section.section--highlight {
+            border-top: 1px solid rgba(199, 204, 209, 0.3);
+        }
+        .section--highlight + .section {
+            border-top: 1px solid rgba(199, 204, 209, 0.3);
+        }
+        .section--highlight .section-label {
+            color: #C7CCD1;
+        }
+        .section--highlight .section-label::after {
+            background: rgba(199, 204, 209, 0.3);
+        }
+        .section--highlight .section-title {
+            color: #F5F5F2;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+        }
+        .section--highlight .prose,
+        .section--highlight .prose p {
+            color: #F5F5F2;
+        }
+        .recommended-badge {
+            position: absolute;
+            top: 32px;
+            right: 40px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 400;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #C7CCD1;
+            margin: 0;
+            z-index: 2;
+        }
+        @media (max-width: 768px) {
+            .section--highlight { padding: 100px 0; }
+            .recommended-badge { top: 20px; right: 24px; font-size: 9.5px; letter-spacing: 0.12em; }
+        }
+
+        /* ── § 06 BIS FAQ ── */
+        .faq-list {
+            grid-column: 1 / 9;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+        .faq-item {
+            padding: 28px 0;
+            border-bottom: 1px solid #C7CCD1;
+        }
+        .faq-item:first-child {
+            border-top: 1px solid #C7CCD1;
+        }
+        .faq-q {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
+            line-height: 1.3;
+            color: #0B2545;
+            margin-bottom: 14px;
+            letter-spacing: -0.015em;
+            font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+        }
+        .faq-a {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            color: #1F2937;
+            max-width: 620px;
+        }
+        @media (max-width: 768px) {
+            .faq-list { grid-column: 1 / -1; }
+            .faq-item { padding: 22px 0; }
+        }
+
+        /* ── EXECUTIVE SUMMARY (§ 00) ── */
+        .section--exec { padding: 90px 0; }
+        .exec-row {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 0;
+            margin-top: 24px;
+        }
+        .exec-cell {
+            padding: 8px 40px;
+            border-right: 1px solid #C7CCD1;
+        }
+        .exec-cell:first-child { padding-left: 0; }
+        .exec-cell:last-child { padding-right: 0; border-right: none; }
+        .exec-label {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #1F2937;
+            margin-bottom: 32px;
+        }
+        .exec-num {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(3rem, 5.5vw, 5rem);
+            line-height: 0.95;
+            letter-spacing: -0.035em;
+            color: #0B2545;
+            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+            margin-bottom: 24px;
+        }
+        .exec-desc {
+            font-size: 0.875rem;
+            line-height: 1.55;
+            color: #0B2545;
+            max-width: 240px;
+        }
+        @media (max-width: 768px) {
+            .section--exec { padding: 56px 0; }
+            .exec-row { grid-template-columns: 1fr; margin-top: 16px; }
+            .exec-cell {
+                padding: 36px 0;
+                border-right: none;
+                border-bottom: 1px solid #C7CCD1;
+            }
+            .exec-cell:first-child { padding-top: 0; }
+            .exec-cell:last-child { border-bottom: none; padding-bottom: 0; }
+            .exec-label { margin-bottom: 24px; }
+        }
+
+        /* ── METODOLOGÍA TIMELINE ── */
+        .timeline-wrap { padding: 24px 0 0; grid-column: 1 / -1; }
+        .timeline-wrap > .grid { padding: 0; }
+        .timeline-canvas {
+            grid-column: 1 / -1;
+            position: relative;
+            height: 96px;
+            margin-bottom: 60px;
+        }
+        .timeline-axis-h {
+            position: absolute;
+            top: 48px;
+            left: 0; right: 0;
+            height: 1px;
+            background: #0B2545;
+        }
+        .timeline-marker {
+            position: absolute;
+            top: 36px;
+            width: 24px;
+        }
+        .timeline-marker[data-pos="0"] { left: -12px; }
+        .timeline-marker[data-pos="1"] { left: 50%; transform: translateX(-50%); }
+        .timeline-marker[data-pos="2"] { right: -12px; }
+        .timeline-marker-tick {
+            width: 1px;
+            height: 30px;
+            background: #0B2545;
+            margin: 0 auto;
+        }
+        .timeline-marker-label {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #0B2545;
+            white-space: nowrap;
+            margin-bottom: 14px;
+        }
+        .timeline-trans {
+            position: absolute;
+            top: 40px;
+            transform: translateX(-50%);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #1F2937;
+            background: #F5F5F2;
+            padding: 0 12px;
+            white-space: nowrap;
+        }
+        .timeline-trans[data-pos="0-1"] { left: 25%; }
+        .timeline-trans[data-pos="1-2"] { left: 75%; }
+
+        .timeline-cards {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            column-gap: 32px;
+            padding-top: 8px;
+        }
+        .timeline-card { max-width: 320px; }
+        .timeline-card:nth-child(2) { margin: 0 auto; }
+        .timeline-card:nth-child(3) { margin-left: auto; }
+        .timeline-card .phase-name {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+            line-height: 1.18;
+            letter-spacing: -0.022em;
+            color: #0B2545;
+            margin-bottom: 14px;
+            font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .timeline-card .phase-flag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.625rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #1F2937;
+            padding: 4px 8px;
+            border: 1px solid #C7CCD1;
+        }
+        .timeline-duration {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+            color: #0B2545;
+            margin-bottom: 18px;
+        }
+        .timeline-card p {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            color: #0B2545;
+        }
+        @media (max-width: 768px) {
+            .timeline-canvas { display: none; }
+            .timeline-cards {
+                grid-template-columns: 1fr;
+                column-gap: 0;
+                padding-left: 36px;
+                padding-top: 0;
+                position: relative;
+            }
+            .timeline-cards::before {
+                content: '';
+                position: absolute;
+                top: 0; bottom: 0; left: 0;
+                width: 1px;
+                background: #0B2545;
+            }
+            .timeline-card {
+                max-width: none;
+                margin: 0 0 56px !important;
+                position: relative;
+            }
+            .timeline-card:last-child { margin-bottom: 0 !important; }
+            .timeline-card::before {
+                content: attr(data-phase);
+                position: absolute;
+                left: -36px;
+                top: 0;
+                font-family: 'IBM Plex Mono', monospace;
+                font-size: 0.6875rem;
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: #0B2545;
+                background: #F5F5F2;
+                padding: 0 8px 4px;
+                margin-left: -8px;
+                z-index: 1;
+            }
+            .timeline-card::after {
+                content: '';
+                position: absolute;
+                left: -36px;
+                top: 12px;
+                width: 16px;
+                height: 1px;
+                background: #0B2545;
+            }
+        }
+
+        /* ── HERO ── */
+        #hero { padding: 100px 0 140px; border-top: none; }
+        @media (max-width: 768px) { #hero { padding: 56px 0 80px; } }
+
+        .hero-title {
+            grid-column: 1 / 12;
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(3rem, 9.5vw, 9.5rem);
+            line-height: 0.94;
+            letter-spacing: -0.045em;
+            color: #0B2545;
+            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+            text-wrap: balance;
+            margin-bottom: 80px;
+        }
+        @media (max-width: 768px) { .hero-title { grid-column: 1 / -1; margin-bottom: 48px; } }
+
+        .hero-summary {
+            grid-column: 2 / 8;
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1rem, 1.15vw, 1.0625rem);
+            line-height: 1.78;
+            color: #0B2545;
+            margin-bottom: 36px;
+        }
+        .hero-summary::first-letter {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: 4.4em;
+            line-height: 0.84;
+            float: left;
+            margin: 0.04em 0.1em -0.06em 0;
+            color: #0B2545;
+            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+        }
+        @media (max-width: 768px) {
+            .hero-summary { grid-column: 1 / -1; }
+            .hero-summary::first-letter { font-size: 3.8em; margin-right: 0.08em; }
+        }
+
+        .hero-byline {
+            grid-column: 2 / 8;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #1F2937;
+            padding-top: 18px;
+            border-top: 1px solid #C7CCD1;
+        }
+        @media (max-width: 768px) { .hero-byline { grid-column: 1 / -1; } }
+
+        /* ── DIAGNÓSTICO ── */
+        .intro {
+            grid-column: 1 / 9;
+            font-size: clamp(1rem, 1.2vw, 1.125rem);
+            line-height: 1.78;
+            color: #0B2545;
+            margin-bottom: 80px;
+        }
+        @media (max-width: 768px) { .intro { grid-column: 1 / -1; margin-bottom: 48px; } }
+
+        .findings {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            column-gap: 24px;
+            row-gap: 0;
+        }
+        @media (max-width: 768px) { .findings { column-gap: 16px; } }
+
+        .finding {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            column-gap: 24px;
+            padding: 80px 0 56px;
+            align-items: start;
+        }
+        @media (max-width: 768px) { .finding { column-gap: 16px; padding: 56px 0 40px; } }
+
+        .finding-num {
+            grid-column: 1 / 2;
+            grid-row: 1;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.14em;
+            color: #0B2545;
+            font-weight: 400;
+            padding-top: 6px;
+        }
+        .finding-body {
+            grid-column: 2 / 8;
+            grid-row: 2;
+        }
+        .finding-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(1.4rem, 2vw, 1.75rem);
+            line-height: 1.18;
+            letter-spacing: -0.022em;
+            color: #0B2545;
+            margin-bottom: 24px;
+            font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+        }
+        .finding-title::before,
+        .service-title::before {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 1px;
+            background: rgba(199, 204, 209, 0.4);
+            margin-bottom: 32px;
+        }
+        .finding-body p {
+            font-size: 1rem;
+            line-height: 1.78;
+            color: #0B2545;
+            max-width: 56ch;
+        }
+        .finding-metric {
+            grid-column: 2 / 8;
+            grid-row: 1;
+            padding: 0 0 56px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .finding-svg {
+            grid-column: 9 / -1;
+            grid-row: 2;
+            padding-top: 12px;
+            max-width: 300px;
+        }
+        .finding-svg svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+        .finding-svg text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            fill: #1F2937;
+            letter-spacing: 0.04em;
+        }
+        .metric-num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 300;
+            font-size: clamp(5rem, 9vw, 7.5rem);
+            line-height: 0.92;
+            letter-spacing: -0.035em;
+            color: #0B2545;
+            margin-bottom: 28px;
+        }
+        .metric-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+            color: #1F2937;
+            max-width: 360px;
+        }
+        @media (max-width: 1024px) {
+            .finding-body { grid-column: 2 / 9; }
+            .finding-metric { grid-column: 2 / 9; }
+            .finding-svg { grid-column: 2 / 9; max-width: 360px; margin-top: 36px; }
+        }
+        @media (max-width: 768px) {
+            .finding-num, .finding-body, .finding-metric, .finding-svg {
+                grid-column: 1 / -1;
+                grid-row: auto;
+                max-width: none;
+            }
+            .finding-num { margin-bottom: 14px; }
+            .finding-metric { padding: 0 0 36px; }
+            .finding-svg { margin-top: 28px; max-width: 360px; }
+        }
+
+        /* marginalia anchored inside specific findings */
+        .finding > .marginalia { margin-top: 0; grid-row: 1; }
+
+        /* ── SERVICIOS ── */
+        .service-line {
+            padding: 120px 0 60px;
+            position: relative;
+        }
+        @media (max-width: 768px) { .service-line { padding: 72px 0 40px; } }
+
+        /* Service flow diagrams */
+        .flow {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            margin: 28px 0 36px;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+        .flow-node {
+            flex: 1 1 0;
+            min-width: 0;
+            border: 1px solid #0B2545;
+            padding: 14px 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9.5px;
+            line-height: 1.3;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #1F2937;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flow-arrow {
+            flex: 0 0 16px;
+            position: relative;
+            align-self: stretch;
+        }
+        .flow-arrow::before {
+            content: '';
+            position: absolute;
+            left: 0; right: 0;
+            top: 50%;
+            height: 1px;
+            background: #0B2545;
+        }
+        .flow-arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 7px;
+            height: 7px;
+            border-top: 1px solid #0B2545;
+            border-right: 1px solid #0B2545;
+            transform: translate(0, -50%) rotate(45deg);
+        }
+        @media (max-width: 768px) {
+            .flow { flex-direction: column; align-items: stretch; }
+            .flow-node { padding: 14px 10px; }
+            .flow-arrow {
+                flex: 0 0 18px;
+                width: 100%;
+                height: 18px;
+                align-self: center;
+            }
+            .flow-arrow::before {
+                left: 50%;
+                right: auto;
+                top: 0;
+                bottom: 0;
+                width: 1px;
+                height: auto;
+                transform: translateX(-50%);
+            }
+            .flow-arrow::after {
+                right: auto;
+                left: 50%;
+                top: auto;
+                bottom: 0;
+                width: 7px;
+                height: 7px;
+                border-top: none;
+                border-right: 1px solid #0B2545;
+                border-bottom: 1px solid #0B2545;
+                transform: translate(-50%, 0) rotate(45deg);
+            }
+        }
+
+        /* Flow reveal-on-scroll (JS-gated) */
+        .js-on .flow-node {
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 500ms cubic-bezier(0.65, 0, 0.35, 1),
+                        transform 500ms cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .js-on .flow.revealed .flow-node { opacity: 1; transform: none; }
+        .js-on .flow.revealed .flow-node:nth-child(1) { transition-delay: 0ms; }
+        .js-on .flow.revealed .flow-node:nth-child(3) { transition-delay: 120ms; }
+        .js-on .flow.revealed .flow-node:nth-child(5) { transition-delay: 240ms; }
+        .js-on .flow.revealed .flow-node:nth-child(7) { transition-delay: 360ms; }
+        .js-on .flow-arrow {
+            opacity: 0;
+            transition: opacity 350ms cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .js-on .flow.revealed .flow-arrow { opacity: 1; }
+        .js-on .flow.revealed .flow-arrow:nth-child(2) { transition-delay: 80ms; }
+        .js-on .flow.revealed .flow-arrow:nth-child(4) { transition-delay: 200ms; }
+        .js-on .flow.revealed .flow-arrow:nth-child(6) { transition-delay: 320ms; }
+
+        .service-line .grid { align-items: start; }
+
+        .service-roman {
+            grid-column: 1 / 4;
+            grid-row: 1;
+            font-family: 'Fraunces', serif;
+            font-weight: 300;
+            font-size: clamp(7rem, 18vw, 15rem);
+            line-height: 0.82;
+            letter-spacing: -0.05em;
+            color: #0B2545;
+            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+            margin-top: -0.12em;
+            user-select: none;
+        }
+        .service-body { grid-column: 4 / 9; grid-row: 1; }
+        .service-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(1.5rem, 2.4vw, 2rem);
+            line-height: 1.18;
+            letter-spacing: -0.022em;
+            color: #0B2545;
+            margin-bottom: 8px;
+            font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+        }
+        .service-subtitle {
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.0625rem;
+            line-height: 1.4;
+            color: #1F2937;
+            margin-bottom: 32px;
+            font-variation-settings: 'opsz' 144;
+        }
+        .service-metrics {
+            grid-column: 4 / -1;
+            grid-row: 2;
+            padding: 88px 0 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 48px;
+            row-gap: 48px;
+        }
+        .service-metric .metric-num {
+            font-size: clamp(5rem, 7.5vw, 6.25rem);
+            margin-bottom: 24px;
+            line-height: 0.92;
+        }
+        .service-line .marginalia { grid-row: 1; }
+        @media (max-width: 1024px) {
+            .service-roman { grid-column: 1 / -1; font-size: clamp(6rem, 16vw, 10rem); margin-bottom: 32px; grid-row: auto; }
+            .service-body { grid-column: 1 / -1; grid-row: auto; }
+            .service-metrics { grid-column: 1 / -1; grid-row: auto; }
+            .service-line .marginalia { grid-column: 1 / -1; max-width: 460px; margin-top: 36px; grid-row: auto; }
+        }
+        @media (max-width: 768px) {
+            .service-metrics { grid-template-columns: 1fr; row-gap: 64px; padding: 56px 0 16px; }
+        }
+
+        /* ── SISTEMA 360 ── */
+        .prose {
+            grid-column: 1 / 8;
+            font-size: clamp(1rem, 1.15vw, 1.0625rem);
+            line-height: 1.78;
+            color: #0B2545;
+        }
+        .prose p + p { margin-top: 1.6em; }
+        @media (max-width: 768px) { .prose { grid-column: 1 / -1; } }
+
+        .econ-block {
+            grid-column: 9 / -1;
+            padding-top: 6px;
+        }
+        .econ-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid #C7CCD1;
+        }
+        .econ-line:first-child { border-top: 1px solid #C7CCD1; }
+        .econ-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #1F2937;
+        }
+        .econ-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 400;
+            font-size: 0.9375rem;
+            color: #0B2545;
+            text-align: right;
+        }
+        .econ-note {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 300;
+            font-size: 0.6875rem;
+            line-height: 1.72;
+            color: #1F2937;
+            margin-top: 22px;
+            max-width: 300px;
+        }
+        @media (max-width: 1024px) {
+            .econ-block { grid-column: 1 / -1; margin-top: 48px; max-width: 480px; }
+        }
+
+        /* ── CRITERIOS ── */
+        .criteria-list {
+            grid-column: 1 / 9;
+            margin-top: 40px;
+        }
+        .criteria-list li {
+            font-size: clamp(1rem, 1.15vw, 1.0625rem);
+            line-height: 1.5;
+            padding: 20px 0 20px 36px;
+            border-bottom: 1px solid #C7CCD1;
+            position: relative;
+            color: #0B2545;
+        }
+        .criteria-list li:first-child { border-top: 1px solid #C7CCD1; }
+        .criteria-list li::before {
+            content: '—';
+            position: absolute;
+            left: 0; top: 19px;
+            color: #C7CCD1;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        .closing-note {
+            grid-column: 1 / 9;
+            margin-top: 40px;
+            font-family: 'Fraunces', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: clamp(1rem, 1.15vw, 1.0625rem);
+            line-height: 1.65;
+            color: #1F2937;
+            font-variation-settings: 'opsz' 144;
+        }
+        .marginalia-criterios {
+            grid-column: 10 / -1;
+            margin-top: 40px;
+        }
+        @media (max-width: 1024px) {
+            .criteria-list, .closing-note { grid-column: 1 / -1; }
+            .marginalia-criterios { grid-column: 1 / -1; max-width: 460px; }
+        }
+
+        /* ── METODOLOGÍA ── */
+        .phase {
+            border-top: 1px solid #C7CCD1;
+            padding: 56px 0;
+        }
+        .phase .grid { align-items: start; }
+        .phase-label {
+            grid-column: 1 / 3;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8125rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #0B2545;
+            padding-top: 6px;
+            font-weight: 400;
+        }
+        .phase-body { grid-column: 3 / 9; }
+        .phase-name {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(1.4rem, 2vw, 1.75rem);
+            line-height: 1.18;
+            letter-spacing: -0.022em;
+            color: #0B2545;
+            margin-bottom: 20px;
+            font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .phase-flag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #1F2937;
+            padding: 5px 10px;
+            border: 1px solid #C7CCD1;
+        }
+        .phase-body p {
+            font-size: 1rem;
+            line-height: 1.78;
+            max-width: 56ch;
+        }
+        .phase-duration {
+            grid-column: 10 / -1;
+            padding-top: 6px;
+        }
+        .phase-duration .econ-label { display: block; margin-bottom: 10px; }
+        .phase-duration .duration-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: 1.55;
+            color: #0B2545;
+        }
+        @media (max-width: 1024px) {
+            .phase-body { grid-column: 3 / -1; }
+            .phase-duration { grid-column: 3 / -1; margin-top: 28px; }
+        }
+        @media (max-width: 768px) {
+            .phase { padding: 40px 0; }
+            .phase-label, .phase-body, .phase-duration { grid-column: 1 / -1; }
+            .phase-label { margin-bottom: 16px; }
+            .phase-duration { margin-top: 24px; }
+        }
+
+        /* ── FIGURES ── */
+        .figure-section { padding: 80px 0; }
+        @media (max-width: 768px) { .figure-section { padding: 48px 0; } }
+
+        .figure { margin: 0; }
+        .figure-01 { grid-column: 1 / 8; }
+        .figure-02 { grid-column: 6 / 13; }
+        .figure-03 { grid-column: 1 / 11; }
+
+        .figure-frame {
+            position: relative;
+            overflow: hidden;
+            background: #0B2545;
+            width: 100%;
+        }
+        .figure-01 .figure-frame { aspect-ratio: 16 / 10; }
+        .figure-02 .figure-frame { aspect-ratio: 4 / 5; }
+        .figure-03 .figure-frame { aspect-ratio: 16 / 9; }
+
+        .figure-frame::before,
+        .figure-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .figure-frame::before {
+            background: #0B2545;
+            mix-blend-mode: multiply;
+            opacity: 0.45;
+            z-index: 2;
+        }
+        .figure-frame::after {
+            background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='ng'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23ng)'/%3E%3C/svg%3E");
+            opacity: 0.08;
+            mix-blend-mode: multiply;
+            z-index: 3;
+        }
+        .figure-img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.05);
+            position: relative;
+            z-index: 1;
+        }
+        .figure figcaption {
+            margin-top: 18px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            line-height: 1.5;
+            letter-spacing: 0.04em;
+            color: #1F2937;
+        }
+        @media (max-width: 768px) {
+            .figure-01, .figure-02, .figure-03 { grid-column: 1 / -1; }
+        }
+
+        /* ── FORM ── */
+        .lead-form {
+            grid-column: 1 / 9;
+            margin-top: 32px;
+        }
+        @media (max-width: 768px) { .lead-form { grid-column: 1 / -1; } }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 40px;
+            row-gap: 40px;
+            margin-bottom: 56px;
+        }
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; row-gap: 32px; }
+        }
+        .form-field { display: flex; flex-direction: column; }
+        .form-field.full { grid-column: 1 / -1; }
+        .form-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #1F2937;
+            margin-bottom: 14px;
+        }
+        .form-input, .form-select {
+            border: none;
+            border-bottom: 1px solid #C7CCD1;
+            background: transparent;
+            padding: 6px 0 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            color: #0B2545;
+            outline: none;
+            transition: border-color 480ms cubic-bezier(0.34, 1.42, 0.42, 1);
+            width: 100%;
+            border-radius: 0;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .form-input::placeholder { color: #C7CCD1; }
+        .form-input:focus, .form-select:focus { border-bottom-color: #0B2545; }
+        .form-select {
+            background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%231F2937' stroke-width='1' d='M0.5 0.5L5 5L9.5 0.5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 2px center;
+            padding-right: 24px;
+            cursor: pointer;
+        }
+        .form-input.error, .form-select.error { border-bottom-color: #0B2545; }
+
+        .form-submit {
+            background: #0B2545;
+            color: #F5F5F2;
+            border: 1px solid #0B2545;
+            padding: 22px 40px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8125rem;
+            font-weight: 400;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 480ms cubic-bezier(0.34, 1.42, 0.42, 1),
+                        color 320ms ease;
+            display: inline-block;
+        }
+        .form-submit:hover {
+            background: transparent;
+            color: #0B2545;
+        }
+        .form-submit:disabled { opacity: 0.5; cursor: wait; }
+
+        .form-disclaimer {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 300;
+            font-size: 0.6875rem;
+            line-height: 1.72;
+            color: #1F2937;
+            margin-top: 30px;
+            max-width: 500px;
+        }
+
+        .form-success {
+            grid-column: 1 / 9;
+            display: none;
+            max-width: 540px;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid #C7CCD1;
+        }
+        .form-success.show { display: block; }
+        .form-success-title {
+            font-family: 'Fraunces', serif;
+            font-weight: 400;
+            font-size: clamp(1.4rem, 2vw, 1.75rem);
+            color: #0B2545;
+            margin-bottom: 18px;
+            font-variation-settings: 'opsz' 144, 'SOFT' 50, 'WONK' 1;
+        }
+        .form-success-body {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #1F2937;
+        }
+        @media (max-width: 768px) { .form-success { grid-column: 1 / -1; } }
+
+        /* ── CASOS (sparse) ── */
+        #casos .prose {
+            grid-column: 1 / 8;
+            max-width: 56ch;
+        }
+        @media (max-width: 768px) { #casos .prose { grid-column: 1 / -1; } }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #F5F5F2;
+            border-top: 1px solid #C7CCD1;
+            padding: 88px 0 0;
+        }
+        .footer-brand {
+            grid-column: 1 / 5;
+        }
+        .footer-brand .brand {
+            margin-bottom: 22px;
+            font-size: 0.75rem;
+        }
+        .footer-brand p {
+            font-size: 0.875rem;
+            line-height: 1.65;
+            color: #1F2937;
+            max-width: 280px;
+        }
+        .footer-col {
+            grid-column: span 2;
+        }
+        .footer-col:nth-of-type(2) { grid-column: 6 / 8; }
+        .footer-col:nth-of-type(3) { grid-column: 8 / 10; }
+        .footer-col:nth-of-type(4) { grid-column: 10 / 13; }
+        .footer-h {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 400;
+            font-size: 0.6875rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #1F2937;
+            margin-bottom: 22px;
+        }
+        .footer-col ul { display: flex; flex-direction: column; gap: 11px; }
+        .footer-col li {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #0B2545;
+        }
+        .footer-col a {
+            color: #0B2545;
+            position: relative;
+            transition: color 320ms ease;
+        }
+        .footer-col a::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: -3px;
+            height: 1px;
+            background: #C7CCD1;
+            transform: scaleX(0);
+            transform-origin: left center;
+            transition: transform 500ms cubic-bezier(0.34, 1.42, 0.42, 1);
+        }
+        .footer-col a:hover::after { transform: scaleX(1); }
+        .footer-col em {
+            font-style: italic;
+            color: #1F2937;
+        }
+        .footer-strip {
+            border-top: 1px solid #C7CCD1;
+            margin-top: 80px;
+            padding: 22px 40px;
+        }
+        .footer-strip-inner {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6875rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #1F2937;
+        }
+        @media (max-width: 1024px) {
+            .footer-brand { grid-column: 1 / -1; margin-bottom: 48px; }
+            .footer-col:nth-of-type(2) { grid-column: 1 / 5; }
+            .footer-col:nth-of-type(3) { grid-column: 5 / 9; }
+            .footer-col:nth-of-type(4) { grid-column: 9 / 13; }
+        }
+        @media (max-width: 768px) {
+            footer { padding: 56px 0 0; }
+            .footer-brand, .footer-col { grid-column: 1 / -1; }
+            .footer-col { margin-top: 36px; }
+            .footer-strip { padding: 22px 24px; margin-top: 56px; }
+            .footer-strip-inner { flex-direction: column; gap: 8px; font-size: 0.625rem; }
+        }
+
+        /* ── SELECTION ── */
+        ::selection { background: #0B2545; color: #F5F5F2; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F5F5F2; }
+        ::-webkit-scrollbar-thumb { background: #C7CCD1; }
+        ::-webkit-scrollbar-thumb:hover { background: #1F2937; }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="nav-row">
+        <a href="#hero" class="brand" aria-label="Meridian Solar Partners — inicio">
+            <img src="logo.png" alt="" class="brand-mark">
+            <span class="brand-name"><b>Meridian</b>&nbsp;<em>Solar Partners</em></span>
+        </a>
+        <nav class="nav-links" aria-label="Secciones del documento">
+            <a href="#diagnostico">§ 01 Diagnóstico</a>
+            <a href="#servicios">§ 02 Servicios</a>
+            <a href="#sistema-360">§ 03 Sistema 360</a>
+            <a href="#casos">§ 04 Casos</a>
+            <a href="#criterios">§ 05 Criterios</a>
+            <a href="#metodologia">§ 06 Metodología</a>
+            <a href="#faq">§ 06 bis FAQ</a>
+            <a href="#contacto">§ 07 Contacto</a>
+        </nav>
+        <button class="hamburger" id="hamburger" aria-label="Abrir índice" aria-expanded="false" aria-controls="mobile-menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Índice del documento">
+    <a href="#diagnostico">§ 01 — Diagnóstico</a>
+    <a href="#servicios">§ 02 — Líneas de servicio</a>
+    <a href="#sistema-360">§ 03 — Sistema 360</a>
+    <a href="#casos">§ 04 — Casos</a>
+    <a href="#criterios">§ 05 — Criterios</a>
+    <a href="#metodologia">§ 06 — Metodología</a>
+    <a href="#faq">§ 06 bis — Preguntas frecuentes</a>
+    <a href="#contacto">§ 07 — Iniciar un encargo</a>
+</nav>
+
+<!-- META STRIP -->
+<div class="meta-strip">
+    <div class="meta-strip-inner">
+        <span>Meridian Solar Partners</span>
+        <span>Documento corporativo · Mayo 2026 · Pamplona</span>
+    </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section id="hero" class="section">
+    <div class="grid">
+        <h1 class="hero-title fu">Automatización comercial con IA para instaladoras fotovoltaicas.</h1>
+        <p class="hero-summary fu d1">Diseño e implanto los tres sistemas que cierran las fugas operativas del proceso comercial de una instaladora: respuesta automática a leads en menos de un minuto, seguimiento sistemático sobre presupuestos emitidos, y generación de un informe financiero personalizado para cada visita técnica. Integrado con su CRM existente. Configurado en la voz de su empresa. Operativo en cuatro semanas.</p>
+        <div class="hero-byline fu d2">Bogdan Cosciug · Meridian Solar Partners · Pamplona · Mayo 2026</div>
+    </div>
+</section>
+
+<!-- PREFACIO · SOBRE EL OPERADOR -->
+<section class="section section--preface">
+    <div class="grid">
+        <div class="preface-block">
+            <div class="preface-rule fu"></div>
+            <div class="section-label fu">Prefacio · Sobre el operador</div>
+            <h2 class="preface-title fu d1">Una operación deliberadamente joven y técnicamente nativa.</h2>
+            <div class="preface-body fu d2">
+                <p>Meridian Solar Partners es la práctica independiente de Bogdan Cosciug, desarrollador de 20 años especializado en sistemas de inteligencia artificial aplicados a procesos comerciales. Operación unipersonal desde Pamplona. Sin agencia detrás. Sin oficinas. Sin equipo que no exista.</p>
+                <p>Esto es deliberado, no una limitación. Las herramientas con las que construyo estos sistemas — modelos de lenguaje, frameworks de agentes, infraestructura de automatización — tienen menos de tres años en el mercado. La ventaja de operar con ellas hoy no la tiene quien lleva veinte años en consultoría de ventas; la tiene quien domina nativamente las herramientas que hoy hacen posible este tipo de automatización.</p>
+                <p>El cliente recibe condiciones específicas — alcance ampliado, derecho a aparecer como caso publicable, prioridad de atención — a cambio de aceptar implícitamente que está participando en la consolidación de la práctica. Si su empresa busca un proveedor consolidado con cartera, esta no es la propuesta correcta. Si busca implementación técnica solvente apoyada en una auditoría diagnóstica previa sin coste, conviene seguir leyendo.</p>
+            </div>
+            <div class="preface-attribution fu d3">
+                <img class="operator-photo"
+                     src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+                     alt="Bogdan Cosciug"
+                     width="80" height="80">
+                <div class="preface-attribution-text">
+                    <div class="preface-sign">— Bogdan Cosciug, Pamplona</div>
+                    <a class="operator-linkedin" href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">linkedin.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- § 00 RESUMEN EJECUTIVO -->
+<section class="section section--exec">
+    <div class="grid">
+        <div class="section-label fu">§ 00 — Resumen ejecutivo</div>
+        <div class="exec-row">
+            <div class="exec-cell fu">
+                <span class="exec-label">01 / Latencia</span>
+                <div class="exec-num"><span class="count">6</span> h +</div>
+                <p class="exec-desc">Tiempo medio de primera respuesta en el sector.</p>
+            </div>
+            <div class="exec-cell fu d1">
+                <span class="exec-label">02 / Seguimiento</span>
+                <div class="exec-num"><span class="count">50</span>–<span class="count">70</span> %</div>
+                <p class="exec-desc">Presupuestos emitidos sin contacto sistemático posterior.</p>
+            </div>
+            <div class="exec-cell fu d2">
+                <span class="exec-label">03 / Tiempo comercial</span>
+                <div class="exec-num"><span class="count">40</span>–<span class="count">60</span> %</div>
+                <p class="exec-desc">Jornada del comercial dedicada a tareas no comerciales.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- § 01 DIAGNÓSTICO -->
+<section id="diagnostico" class="section">
+    <div class="grid">
+        <div class="section-label fu">§ 01 — Diagnóstico</div>
+        <h2 class="section-title fu d1">Tres fugas estructurales en el embudo de una instaladora solar.</h2>
+        <p class="intro fu d2">El sector fotovoltaico español ha multiplicado su volumen de instalaciones residenciales en los últimos cinco años (informes anuales de UNEF y APPA Renovables). Ese crecimiento ha tensionado los procesos comerciales: la captación funciona, pero la conversión sufre. Los patrones observados en el sector son consistentes, y las ventas perdidas no se explican por precio ni por producto. Se explican por tres fricciones operativas concretas, reproducibles y medibles.</p>
+
+        <div class="findings">
+            <article class="finding fu">
+                <div class="finding-num">01.1</div>
+                <div class="finding-metric">
+                    <div class="metric-num">&lt; 1 h</div>
+                    <div class="metric-label">ventana crítica de respuesta documentada en los estudios de lead response time. Por encima de ese umbral, la probabilidad de cualificación se reduce sustancialmente.</div>
+                </div>
+                <div class="finding-body">
+                    <h3 class="finding-title">Latencia en la primera respuesta</h3>
+                    <p>Los estudios sobre tiempo de respuesta en ventas consultivas (Harvard Business Review, MIT, InsideSales) coinciden en un patrón: la probabilidad de cualificar un lead cae aproximadamente diez veces cuando la primera respuesta supera la primera hora. En fotovoltaica residencial el efecto se intensifica porque la mayoría de los presupuestos se solicitan en paralelo a dos o tres competidores. La empresa que responde primero ocupa la posición negociadora dominante.</p>
+                </div>
+                <div class="finding-svg" aria-hidden="true">
+                    <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="14" y1="70" x2="50" y2="70" stroke="#0B2545" stroke-width="1"/>
+                        <line x1="50" y1="70" x2="276" y2="70" stroke="#C7CCD1" stroke-width="1"/>
+                        <line x1="14" y1="64" x2="14" y2="76" stroke="#0B2545" stroke-width="1"/>
+                        <line x1="50" y1="60" x2="50" y2="80" stroke="#0B2545" stroke-width="1"/>
+                        <line x1="138" y1="65" x2="138" y2="75" stroke="#C7CCD1" stroke-width="1"/>
+                        <line x1="276" y1="65" x2="276" y2="75" stroke="#C7CCD1" stroke-width="1"/>
+                        <text x="14" y="44">VENTANA EFECTIVA</text>
+                        <text x="148" y="44">CAÍDA 10×</text>
+                        <text x="14" y="98" text-anchor="middle">0h</text>
+                        <text x="50" y="98" text-anchor="middle">1h</text>
+                        <text x="138" y="98" text-anchor="middle">4h</text>
+                        <text x="276" y="98" text-anchor="middle">8h</text>
+                    </svg>
+                </div>
+            </article>
+
+            <article class="finding fu">
+                <div class="finding-num">01.2</div>
+                <div class="finding-metric">
+                    <div class="metric-num">50–70%</div>
+                    <div class="metric-label">rango habitual de presupuestos sin contacto sistemático posterior al envío en ventas consultivas B2C de alto ticket.</div>
+                </div>
+                <div class="finding-body">
+                    <h3 class="finding-title">Presupuestos sin proceso de seguimiento</h3>
+                    <p>La pérdida de presupuestos por ausencia de seguimiento sistemático es un patrón ampliamente documentado en ventas consultivas de alto valor. En el sector fotovoltaico, una vez emitido el presupuesto, el comercial enviará uno o dos recordatorios manuales y, sin respuesta, dará el caso por cerrado. El director comercial no tiene visibilidad real sobre el estado del embudo: el CRM marca "pendiente" tanto al cliente que cerrará en dos semanas como al que ya firmó con la competencia.</p>
+                </div>
+                <div class="finding-svg" aria-hidden="true">
+                    <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="hatch12" x="0" y="0" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                                <line x1="0" y1="0" x2="0" y2="4" stroke="#C7CCD1" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect x="14" y="56" width="156" height="28" fill="url(#hatch12)"/>
+                        <rect x="14" y="56" width="260" height="28" stroke="#0B2545" stroke-width="1" fill="none"/>
+                        <line x1="170" y1="56" x2="170" y2="84" stroke="#0B2545" stroke-width="1"/>
+                        <text x="14" y="44">SIN SEGUIMIENTO</text>
+                        <text x="178" y="44">CON CONTACTO</text>
+                        <text x="14" y="102">0</text>
+                        <text x="170" y="102" text-anchor="middle">60</text>
+                        <text x="274" y="102" text-anchor="end">100</text>
+                    </svg>
+                </div>
+                <aside class="marginalia">
+                    <strong>Nota del consultor —</strong> El sector arrastra la asunción de que el problema es el precio. Los patrones observados no lo respaldan: en residencial unifamiliar el precio es factor decisivo en una minoría de los casos perdidos. La fuga real es operativa.
+                </aside>
+            </article>
+
+            <article class="finding fu">
+                <div class="finding-num">01.3</div>
+                <div class="finding-metric">
+                    <div class="metric-num">40–60%</div>
+                    <div class="metric-label">tiempo del comercial dedicado a tareas no comerciales — benchmarks de productividad en equipos de ventas B2C.</div>
+                </div>
+                <div class="finding-body">
+                    <h3 class="finding-title">Comerciales asignados a tareas no comerciales</h3>
+                    <p>El comercial medio en una instaladora dedica una proporción significativa de su jornada a tareas que no son cerrar: respuestas iniciales por WhatsApp, agendado de visitas, persecución de clientes fríos, generación de presupuestos preliminares. Los estudios de productividad en equipos de ventas consultivas sitúan esa proporción entre el 40% y el 60%, en función del grado de automatización del proceso comercial.</p>
+                </div>
+                <div class="finding-svg" aria-hidden="true">
+                    <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M 70 22 A 38 38 0 0 0 70 98" stroke="#C7CCD1" stroke-width="1" fill="none"/>
+                        <path d="M 70 22 A 38 38 0 0 1 70 98" stroke="#0B2545" stroke-width="1" fill="none"/>
+                        <line x1="70" y1="22" x2="70" y2="98" stroke="#0B2545" stroke-width="1"/>
+                        <line x1="124" y1="46" x2="142" y2="46" stroke="#0B2545" stroke-width="1"/>
+                        <text x="148" y="42">TAREAS NO</text>
+                        <text x="148" y="55">COMERCIALES</text>
+                        <text x="148" y="68">40 – 60 %</text>
+                        <line x1="124" y1="90" x2="142" y2="90" stroke="#C7CCD1" stroke-width="1"/>
+                        <text x="148" y="86">VENTA</text>
+                        <text x="148" y="99">EFECTIVA</text>
+                    </svg>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- § 02 LÍNEAS DE SERVICIO -->
+<section id="servicios" class="section">
+    <div class="grid">
+        <div class="section-label fu">§ 02 — Líneas de servicio</div>
+        <h2 class="section-title fu d1">Tres intervenciones discretas. Aplicables por separado o integradas.</h2>
+        <p class="intro fu d2">Cada línea de servicio está diseñada para resolver una de las tres fugas identificadas en el diagnóstico. Pueden implementarse en orden o en paralelo, según el estado del proceso comercial del cliente. La integración entre las tres — modalidad Sistema 360 — apunta a resultados sustancialmente superiores frente a la implantación aislada de cada componente, por el efecto de retroalimentación entre las capas.</p>
+    </div>
+
+    <div class="service-line">
+        <div class="grid">
+            <div class="service-roman fu">I</div>
+            <div class="service-body fu d1">
+                <h3 class="service-title">Cierra-Citas Solar 24/7</h3>
+                <p class="service-subtitle">Atención sistemática del primer contacto.</p>
+                <div class="flow" aria-hidden="true">
+                    <div class="flow-node">Lead entrante</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Cualificación IA</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Agendado</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Visita comercial</div>
+                </div>
+                <p>Sistema asistido por IA integrado en WhatsApp, formularios web y llamadas perdidas. Diseñado para responder cualquier lead entrante en menos de sesenta segundos, las veinticuatro horas del día, cualificar al cliente según los criterios definidos por el director comercial, descartar los no viables y agendar visita técnica directamente en el calendario del comercial asignado.</p>
+            </div>
+            <div class="service-metrics fu d2">
+                <div class="service-metric">
+                    <div class="metric-num">&lt; 60 s</div>
+                    <div class="metric-label">objetivo operativo de tiempo de primera respuesta.</div>
+                </div>
+                <div class="service-metric">
+                    <div class="metric-num">+25–35 pp</div>
+                    <div class="metric-label">rango esperable de incremento en conversión a visita técnica, según benchmarks de respuesta automatizada.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="service-line">
+        <div class="grid">
+            <div class="service-roman fu">II</div>
+            <div class="service-body fu d1">
+                <h3 class="service-title">Rescate de Presupuestos Fantasma</h3>
+                <p class="service-subtitle">Sistemática de seguimiento sobre presupuestos emitidos.</p>
+                <div class="flow" aria-hidden="true">
+                    <div class="flow-node">CRM histórico</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Segmentación</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Reactivación</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Señal de cierre</div>
+                </div>
+                <p>Capa de seguimiento automatizado sobre los presupuestos que el CRM marca como pendientes. Identifica el estado real de cada uno, reactiva al cliente con la secuencia adecuada a su perfil — residencial, autónomo, comunidad de propietarios, empresa — y devuelve el caso al comercial únicamente cuando hay señal de cierre.</p>
+            </div>
+            <div class="service-metrics fu d2">
+                <div class="service-metric">
+                    <div class="metric-num">15–25%</div>
+                    <div class="metric-label">rango objetivo de recuperación sobre presupuestos sin seguimiento, según benchmarks de programas de reactivación.</div>
+                </div>
+                <div class="service-metric">
+                    <div class="metric-num t-mono" style="font-size:1.0625rem; letter-spacing:0.04em; text-transform:uppercase;">Primer ciclo</div>
+                    <div class="metric-label">activación del histórico acumulado en el CRM. La magnitud económica depende del tamaño de la cartera del cliente.</div>
+                </div>
+            </div>
+            <aside class="marginalia">
+                <strong>Nota del consultor —</strong> Las tres líneas son interdependientes pero no obligatorias. Recomendamos auditar el flujo actual antes de decidir el orden de implantación. Habitualmente la intervención de mayor impacto inmediato es la línea II.
+            </aside>
+        </div>
+    </div>
+
+    <div class="service-line">
+        <div class="grid">
+            <div class="service-roman fu">III</div>
+            <div class="service-body fu d1">
+                <h3 class="service-title">Simulador Cierra-Ventas</h3>
+                <p class="service-subtitle">Material de cierre con cifras del cliente, no del catálogo.</p>
+                <div class="flow" aria-hidden="true">
+                    <div class="flow-node">Factura cliente</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Análisis financiero</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Informe personalizado</div>
+                    <div class="flow-arrow"></div>
+                    <div class="flow-node">Visita técnica</div>
+                </div>
+                <p>Herramienta que, a partir de la factura eléctrica del cliente potencial, genera un informe financiero personalizado en menos de dos minutos: ahorro anual estimado, payback, TIR a 25 años y cuota mensual en tres escenarios de financiación. El comercial llega a la visita con un documento concreto sobre el que conversar, no con un argumentario genérico.</p>
+            </div>
+            <div class="service-metrics fu d2">
+                <div class="service-metric">
+                    <div class="metric-num">&lt; 2 min</div>
+                    <div class="metric-label">tiempo objetivo de generación del informe.</div>
+                </div>
+                <div class="service-metric">
+                    <div class="metric-num">+10–20 pp</div>
+                    <div class="metric-label">rango esperable de incremento en cierre en primera visita, según benchmarks de materiales personalizados.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FIG. 01 -->
+<section class="section figure-section">
+    <div class="grid">
+        <figure class="figure figure-01 fu">
+            <div class="figure-frame">
+                <img class="figure-img"
+                     src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1600&q=80"
+                     alt="Vista aérea de una instalación fotovoltaica de escala industrial"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+            <figcaption>FIG. 01 · Instalación fotovoltaica de escala industrial · 2026</figcaption>
+        </figure>
+    </div>
+</section>
+
+<!-- § 03 SISTEMA SOLAR 360 (highlighted) -->
+<section id="sistema-360" class="section section--highlight">
+    <span class="recommended-badge" aria-label="Modalidad recomendada">★ Modalidad recomendada</span>
+    <div class="grid">
+        <div class="section-label fu">§ 03 — Sistema Solar 360</div>
+        <h2 class="section-title fu d1">Las tres líneas integradas bajo una operación única.</h2>
+        <div class="prose fu d2">
+            <p>Modalidad recomendada para instaladoras que requieren control unificado del embudo comercial. Las tres líneas operan sobre la misma capa de datos: lo que aprende el Cierra-Citas alimenta el Rescate de Presupuestos; lo que descubre el Simulador refina la cualificación del primer contacto.</p>
+            <p>Incluye revisión operativa quincenal directa con el operador, ajustes mensuales sobre las secuencias según la respuesta del mercado, y panel de gestión consolidado con los indicadores clave de las tres líneas. Modalidad retainer mensual con compromiso mínimo de tres meses — un ciclo completo de aprendizaje del sistema.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FIG. 02 -->
+<section class="section figure-section">
+    <div class="grid">
+        <figure class="figure figure-02 fu">
+            <div class="figure-frame">
+                <img class="figure-img"
+                     src="https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?auto=format&fit=crop&w=1200&q=80"
+                     alt="Detalle de equipamiento técnico en una instalación fotovoltaica residencial"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+            <figcaption>FIG. 02 · Detalle de equipamiento técnico en instalación residencial · 2026</figcaption>
+        </figure>
+    </div>
+</section>
+
+<!-- § 04 CASOS -->
+<section id="casos" class="section">
+    <div class="grid">
+        <div class="section-label fu">§ 04 — Casos</div>
+        <h2 class="section-title fu d1">Casos en construcción.</h2>
+        <p class="prose fu d2">Meridian Solar Partners inicia operaciones en 2026. El primer ciclo de casos documentados — con consentimiento expreso de los clientes participantes — estará disponible a partir del cuarto trimestre. Hasta entonces, las decisiones de contratación deben apoyarse en la propuesta técnica detallada que se entrega tras la auditoría de Fase 0.</p>
+    </div>
+</section>
+
+<!-- § 05 CRITERIOS -->
+<section id="criterios" class="section">
+    <div class="grid">
+        <div class="section-label fu">§ 05 — Criterios</div>
+        <h2 class="section-title fu d1">Para qué tipo de instaladora aporta más valor.</h2>
+        <p class="prose fu d2">El sistema produce más impacto medible cuanto más maduro es el proceso comercial existente, pero no exige umbrales mínimos de tamaño ni facturación. Funciona bien en instaladoras pequeñas con un equipo comercial activo, en empresas medianas con CRM ya implantado, y en operaciones más grandes con flujo de leads sostenido. La forma rápida de comprobar si encaja en su caso concreto es la auditoría de Fase 0 — noventa minutos, sin coste, sin compromiso. Si tras la auditoría el resultado es que su situación no se beneficiaría de esta intervención, se le dirá explícitamente.</p>
+    </div>
+</section>
+
+<!-- FIG. 03 -->
+<section class="section figure-section">
+    <div class="grid">
+        <figure class="figure figure-03 fu">
+            <div class="figure-frame">
+                <img class="figure-img"
+                     src="https://images.unsplash.com/photo-1545209463-e2825498edbf?auto=format&fit=crop&w=1600&q=80"
+                     alt="Instalación fotovoltaica residencial sobre tejado unifamiliar"
+                     loading="lazy"
+                     decoding="async">
+            </div>
+            <figcaption>FIG. 03 · Instalación fotovoltaica residencial — sector unifamiliar · 2026</figcaption>
+        </figure>
+    </div>
+</section>
+
+<!-- § 06 METODOLOGÍA -->
+<section id="metodologia" class="section">
+    <div class="grid">
+        <div class="section-label fu">§ 06 — Metodología</div>
+        <h2 class="section-title fu d1">Tres fases. Sin compromiso hasta el final de la primera.</h2>
+    </div>
+
+    <div class="timeline-wrap">
+        <div class="grid">
+            <div class="timeline-canvas fu d2" aria-hidden="true">
+                <div class="timeline-axis-h"></div>
+                <div class="timeline-marker" data-pos="0">
+                    <div class="timeline-marker-tick"></div>
+                    <span class="timeline-marker-label">Fase 0</span>
+                </div>
+                <div class="timeline-marker" data-pos="1">
+                    <div class="timeline-marker-tick"></div>
+                    <span class="timeline-marker-label">Fase 1</span>
+                </div>
+                <div class="timeline-marker" data-pos="2">
+                    <div class="timeline-marker-tick"></div>
+                    <span class="timeline-marker-label">Fase 2</span>
+                </div>
+                <span class="timeline-trans" data-pos="0-1">Sin coste</span>
+                <span class="timeline-trans" data-pos="1-2">Implantación</span>
+            </div>
+
+            <div class="timeline-cards fu d2">
+                <div class="timeline-card" data-phase="Fase 0">
+                    <h3 class="phase-name">Auditoría operativa <span class="phase-flag">sin coste</span></h3>
+                    <div class="timeline-duration">90 min + 5 días hábiles</div>
+                    <p>Sesión de noventa minutos con el director comercial y el responsable de operaciones, en la que revisamos el embudo actual, identificamos las fugas y cuantificamos el impacto en euros. Entregamos un informe escrito, propiedad del cliente con o sin contratación posterior.</p>
+                </div>
+                <div class="timeline-card" data-phase="Fase 1">
+                    <h3 class="phase-name">Implantación</h3>
+                    <div class="timeline-duration">2–4 semanas según las líneas activadas</div>
+                    <p>Configuración de las líneas elegidas, integración con el CRM y las herramientas existentes, entrenamiento de los modelos con el catálogo y la voz del cliente, validación con tráfico real.</p>
+                </div>
+                <div class="timeline-card" data-phase="Fase 2">
+                    <h3 class="phase-name">Operación y ajuste continuo</h3>
+                    <div class="timeline-duration">Continua</div>
+                    <p>Revisión mensual del rendimiento con el operador, con ajustes sobre secuencias, criterios y materiales. Compromiso mínimo de tres meses para servicios individuales, seis para Sistema Solar 360. Cancelable con preaviso de treinta días tras ese período.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- § 06 BIS PREGUNTAS FRECUENTES -->
+<section id="faq" class="section">
+    <div class="grid">
+        <div class="section-label fu">§ 06 bis · Preguntas frecuentes</div>
+        <h2 class="section-title fu d1">Lo que se pregunta antes de iniciar un encargo.</h2>
+        <div class="faq-list">
+            <div class="faq-item fu">
+                <h3 class="faq-q">¿Qué pasa con los datos de mi CRM?</h3>
+                <p class="faq-a">Se accede únicamente a los datos estrictamente necesarios para configurar el sistema. Todo el procesamiento se realiza en infraestructura europea, cumpliendo GDPR. Se firma un contrato de encargado del tratamiento previo al inicio de cualquier integración.</p>
+            </div>
+            <div class="faq-item fu">
+                <h3 class="faq-q">¿Quién es propietario del sistema entrenado con mi información?</h3>
+                <p class="faq-a">El modelo entrenado con su catálogo, voz comercial y particularidades es propiedad exclusiva de su empresa. En caso de finalización del servicio, recibe la configuración completa y la documentación técnica para que pueda mantenerlo internamente o trasladarlo a otro proveedor.</p>
+            </div>
+            <div class="faq-item fu">
+                <h3 class="faq-q">¿Y si mis comerciales se resisten a usarlo?</h3>
+                <p class="faq-a">El sistema no sustituye al comercial — le entrega más oportunidades cualificadas y le quita las tareas no comerciales. La implantación incluye sesión de formación con el equipo y dos semanas de acompañamiento durante la transición. Si tras un mes el equipo no adopta la herramienta, se ajusta el comportamiento del sistema.</p>
+            </div>
+            <div class="faq-item fu">
+                <h3 class="faq-q">¿Cuánto downtime supone la implantación?</h3>
+                <p class="faq-a">Cero downtime sobre las operaciones existentes. El sistema se conecta en paralelo al flujo actual y se activa progresivamente una vez validado. El proceso comercial vigente sigue operativo durante toda la implantación.</p>
+            </div>
+            <div class="faq-item fu">
+                <h3 class="faq-q">¿Qué pasa si necesito soporte fuera del horario laboral?</h3>
+                <p class="faq-a">El sistema en sí funciona 24/7. Para incidencias técnicas urgentes hay un canal directo de WhatsApp con respuesta garantizada en menos de cuatro horas, los siete días de la semana.</p>
+            </div>
+            <div class="faq-item fu">
+                <h3 class="faq-q">¿Por qué un solo operador y no una agencia?</h3>
+                <p class="faq-a">Coste y velocidad. Una agencia con la misma capacidad técnica cobra entre tres y cinco veces más por proyecto equivalente, principalmente por estructura administrativa. La contrapartida es que la capacidad operativa es limitada: tres clientes activos en paralelo es el máximo durante 2026.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- § 07 CONTACTO -->
+<section id="contacto" class="section">
+    <div class="grid">
+        <div class="section-label fu">§ 07 — Iniciar un encargo</div>
+        <h2 class="section-title fu d1">Solicitar la auditoría de Fase 0.</h2>
+        <p class="intro fu d2">Las solicitudes se responden en menos de veinticuatro horas hábiles. La primera conversación es con un partner, no con un comercial. Si su caso no encaja en nuestro alcance, se lo comunicaremos en esa misma conversación.</p>
+
+        <form class="lead-form fu" id="lead-form" novalidate>
+            <div class="form-grid">
+                <div class="form-field">
+                    <label class="form-label" for="nombre">Nombre y apellidos</label>
+                    <input class="form-input" type="text" id="nombre" name="nombre" required autocomplete="name">
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="empresa">Razón social</label>
+                    <input class="form-input" type="text" id="empresa" name="empresa" required autocomplete="organization">
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="cargo">Cargo en la empresa</label>
+                    <input class="form-input" type="text" id="cargo" name="cargo" required autocomplete="organization-title">
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="telefono">Teléfono de contacto directo</label>
+                    <input class="form-input" type="tel" id="telefono" name="telefono" required autocomplete="tel">
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="facturacion">Facturación anual aproximada</label>
+                    <input class="form-input" type="text" id="facturacion" name="facturacion" placeholder="Ej: 2.5M€, 800.000€…" autocomplete="off">
+                    <label class="form-check-label" style="display:flex;align-items:center;gap:8px;margin-top:10px;cursor:pointer;">
+                        <input type="checkbox" id="facturacion-ndc" name="facturacion_ndc" value="Prefiero no contestar" style="width:15px;height:15px;accent-color:#0B2545;cursor:pointer;">
+                        <span style="font-size:0.75rem;letter-spacing:0.08em;color:#6B7280;text-transform:uppercase;">Prefiero no contestar</span>
+                    </label>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" for="leads">Volumen de leads mensuales</label>
+                    <input class="form-input" type="text" id="leads" name="leads" placeholder="Ej: 80, 200…" required autocomplete="off">
+                </div>
+            </div>
+            <button type="submit" class="form-submit">Solicitar auditoría de Fase 0</button>
+            <p class="form-disclaimer">Sus datos no se comparten con terceros. Plazo de respuesta: 24 horas hábiles. La auditoría se imparte por videoconferencia o, según ubicación, en Pamplona bajo cita previa.</p>
+        </form>
+
+        <div class="form-success" id="form-success" role="status" aria-live="polite">
+            <p class="form-success-title">Solicitud registrada.</p>
+            <p class="form-success-body">Un partner se pondrá en contacto en las próximas 24 horas hábiles para coordinar la fecha de la sesión.</p>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <div class="grid">
+        <div class="footer-brand">
+            <div class="brand">
+                <img src="logo.png" alt="" class="brand-mark">
+                <span class="brand-name"><b>Meridian</b>&nbsp;<em>Solar Partners</em></span>
+            </div>
+            <p>Práctica especializada en eficiencia comercial para instaladoras fotovoltaicas.</p>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-h">Sesiones</h4>
+            <ul>
+                <li>Pamplona — sesiones presenciales bajo cita previa.</li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-h">Documentación</h4>
+            <ul>
+                <li><a href="#">Política de privacidad</a></li>
+                <li><a href="#">Aviso legal</a></li>
+                <li><a href="#">Tratamiento de cookies</a></li>
+                <li><a href="#">Términos del encargo</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-h">Contacto</h4>
+            <ul>
+                <li><a href="#contacto">Formulario en § 07</a></li>
+                <li><a href="mailto:hola@meridiansolarpartners.com">hola@meridiansolarpartners.com</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-strip">
+        <div class="footer-strip-inner">
+            <span>© 2026 Meridian Solar Partners</span>
+            <span>Documento corporativo · Mayo 2026</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    /* Mark JS active so the JS-gated reveal CSS takes effect */
+    document.documentElement.classList.add('js-on');
+
+    /* ── REVEAL ON SCROLL (spring-eased CSS) ── */
+    const io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fu').forEach(function(el) { io.observe(el); });
+
+    /* ── HAMBURGER ── */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    function closeMenu() {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+    function toggleMenu() {
+        const open = !mobileMenu.classList.contains('open');
+        hamburger.classList.toggle('open', open);
+        mobileMenu.classList.toggle('open', open);
+        hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        document.body.style.overflow = open ? 'hidden' : '';
+    }
+    hamburger.addEventListener('click', toggleMenu);
+    mobileMenu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+    });
+
+    /* ── FORM ── */
+    const form = document.getElementById('lead-form');
+    const success = document.getElementById('form-success');
+
+    // Facturación: toggle input when "prefiero no contestar" is checked
+    const facturacionInput = document.getElementById('facturacion');
+    const facturacionNdc   = document.getElementById('facturacion-ndc');
+    facturacionNdc.addEventListener('change', function() {
+        facturacionInput.disabled = this.checked;
+        facturacionInput.style.opacity = this.checked ? '0.35' : '1';
+        if (this.checked) {
+            facturacionInput.value = '';
+            facturacionInput.classList.remove('error');
+            facturacionInput.style.borderBottomColor = '';
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let valid = true;
+
+        // Validate standard required fields (excluding facturacion, handled separately)
+        form.querySelectorAll('[required]').forEach(function(f) {
+            if (!f.value.trim()) {
+                valid = false;
+                f.classList.add('error');
+                f.style.borderBottomColor = '#0B2545';
+                const clear = function() { f.classList.remove('error'); f.style.borderBottomColor = ''; };
+                f.addEventListener('input', clear, { once: true });
+                f.addEventListener('change', clear, { once: true });
+            }
+        });
+
+        // Validate facturación: must have a value OR checkbox checked
+        if (!facturacionNdc.checked && !facturacionInput.value.trim()) {
+            valid = false;
+            facturacionInput.classList.add('error');
+            facturacionInput.style.borderBottomColor = '#0B2545';
+            const clearFact = function() { facturacionInput.classList.remove('error'); facturacionInput.style.borderBottomColor = ''; };
+            facturacionInput.addEventListener('input', clearFact, { once: true });
+        }
+
+        if (!valid) {
+            const firstError = form.querySelector('.error');
+            if (firstError) firstError.focus();
+            return;
+        }
+
+        const btn = form.querySelector('.form-submit');
+        btn.textContent = 'Enviando…';
+        btn.disabled = true;
+
+        const facturacionValue = facturacionNdc.checked ? 'Prefiero no contestar' : facturacionInput.value.trim();
+
+        const payload = {
+            nombre:      document.getElementById('nombre').value.trim(),
+            empresa:     document.getElementById('empresa').value.trim(),
+            cargo:       document.getElementById('cargo').value.trim(),
+            telefono:    document.getElementById('telefono').value.trim(),
+            facturacion: facturacionValue,
+            leads:       document.getElementById('leads').value.trim(),
+            _subject:    'Nueva solicitud de auditoría Fase 0 — Meridian Solar Partners',
+            _captcha:    'false'
+        };
+
+        fetch('https://formsubmit.co/ajax/hola@meridiansolarpartners.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(payload)
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+            form.style.display = 'none';
+            success.classList.add('show');
+            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(function() {
+            // Fallback: show success anyway (formsubmit may still deliver)
+            form.style.display = 'none';
+            success.classList.add('show');
+            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
+
+    /* ── ANCHOR SCROLL (custom easeInOutCubic, 90px offset, 700ms) ── */
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+    function smoothScrollTo(targetY, duration) {
+        const startY = window.scrollY;
+        const distance = targetY - startY;
+        const startTime = performance.now();
+        (function step(now) {
+            const t = Math.min((now - startTime) / duration, 1);
+            window.scrollTo(0, startY + distance * easeInOutCubic(t));
+            if (t < 1) requestAnimationFrame(step);
+        })(performance.now());
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+            const href = a.getAttribute('href');
+            if (href === '#' || href.length < 2) return;
+            const target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            const top = target.getBoundingClientRect().top + window.pageYOffset - 90;
+            smoothScrollTo(top, 700);
+        });
+    });
+
+    /* ── COUNTER ANIMATION (§ 00 Resumen Ejecutivo) ── */
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function animateCounter(el, target, duration) {
+        const dur = duration || 1200;
+        const start = performance.now();
+        (function step(now) {
+            const t = Math.min((now - start) / dur, 1);
+            el.textContent = Math.round(easeOutCubic(t) * target);
+            if (t < 1) requestAnimationFrame(step);
+        })(performance.now());
+    }
+
+    // Capture target values from initial text content (so JS-off shows real numbers)
+    document.querySelectorAll('.count').forEach(function(el) {
+        el.dataset.target = el.textContent.trim();
+        el.textContent = '0';
+    });
+
+    const countObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (!e.isIntersecting) return;
+            e.target.querySelectorAll('.count').forEach(function(span) {
+                animateCounter(span, parseInt(span.dataset.target, 10), 1200);
+            });
+            countObserver.unobserve(e.target);
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.exec-row').forEach(function(row) { countObserver.observe(row); });
+
+    /* ── SVG SCHEMA + FLOW REVEAL (§ 01 SVG strokes draw, § 02 flow nodes fade) ── */
+    function strokedElements(svg) {
+        return Array.from(svg.querySelectorAll('line, path, rect, circle, polygon, polyline')).filter(function(el) {
+            if (el.closest('defs')) return false;
+            const stroke = el.getAttribute('stroke');
+            return stroke && stroke !== 'none';
+        });
+    }
+
+    // Pre-hide SVG strokes and text labels
+    document.querySelectorAll('.finding-svg svg').forEach(function(svg) {
+        strokedElements(svg).forEach(function(el) {
+            try {
+                const len = el.getTotalLength();
+                if (len > 0) {
+                    el.style.strokeDasharray = len;
+                    el.style.strokeDashoffset = len;
+                    el.style.transition = 'stroke-dashoffset 800ms cubic-bezier(0.65, 0, 0.35, 1)';
+                }
+            } catch (err) {}
+        });
+        svg.querySelectorAll('text').forEach(function(t) {
+            t.style.opacity = '0';
+            t.style.transition = 'opacity 300ms ease-out 400ms';
+        });
+    });
+
+    const schemaObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (!e.isIntersecting) return;
+            if (e.target.matches('.finding-svg')) {
+                const svg = e.target.querySelector('svg');
+                if (svg) {
+                    strokedElements(svg).forEach(function(el) { el.style.strokeDashoffset = '0'; });
+                    svg.querySelectorAll('text').forEach(function(t) { t.style.opacity = '1'; });
+                }
+            } else if (e.target.matches('.flow')) {
+                e.target.classList.add('revealed');
+            }
+            schemaObserver.unobserve(e.target);
+        });
+    }, { threshold: 0.25 });
+
+    document.querySelectorAll('.finding-svg, .flow').forEach(function(el) { schemaObserver.observe(el); });
+</script>
+</body>
+</html>
