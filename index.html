@@ -1519,12 +1519,12 @@
             </div>
             <div class="preface-attribution fu d3">
                 <img class="operator-photo"
-                     src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
+                     src="bogdan.jpg"
                      alt="Bogdan Cosciug"
                      width="80" height="80">
                 <div class="preface-attribution-text">
                     <div class="preface-sign">— Bogdan Cosciug, Pamplona</div>
-                    <a class="operator-linkedin" href="https://www.linkedin.com/in/" target="_blank" rel="noopener noreferrer">linkedin.com</a>
+                    <a class="operator-linkedin" href="https://www.linkedin.com/in/bogdan-cosciug-a79b0640a" target="_blank" rel="noopener noreferrer">linkedin.com/in/bogdan-cosciug</a>
                 </div>
             </div>
         </div>
@@ -2048,8 +2048,18 @@
     });
 
     /* ── FORM ── */
+    const SHEETS_URL = 'PENDIENTE_URL_GOOGLE_SCRIPT';
+
     const form = document.getElementById('lead-form');
     const success = document.getElementById('form-success');
+
+    // Bloquear si ya envió antes desde este navegador
+    if (localStorage.getItem('msp_solicitud_enviada')) {
+        form.style.display = 'none';
+        success.classList.add('show');
+        document.querySelector('.form-success-title').textContent = 'Ya enviaste una solicitud.';
+        document.querySelector('.form-success-body').textContent = 'Ya recibimos tu solicitud anteriormente. Un partner se pondrá en contacto contigo en las próximas 24 horas hábiles.';
+    }
 
     // Facturación: toggle input when "prefiero no contestar" is checked
     const facturacionInput = document.getElementById('facturacion');
@@ -2068,7 +2078,6 @@
         e.preventDefault();
         let valid = true;
 
-        // Validate standard required fields (excluding facturacion, handled separately)
         form.querySelectorAll('[required]').forEach(function(f) {
             if (!f.value.trim()) {
                 valid = false;
@@ -2080,7 +2089,6 @@
             }
         });
 
-        // Validate facturación: must have a value OR checkbox checked
         if (!facturacionNdc.checked && !facturacionInput.value.trim()) {
             valid = false;
             facturacionInput.classList.add('error');
@@ -2101,34 +2109,30 @@
 
         const facturacionValue = facturacionNdc.checked ? 'Prefiero no contestar' : facturacionInput.value.trim();
 
-        const payload = {
+        const params = new URLSearchParams({
             nombre:      document.getElementById('nombre').value.trim(),
             empresa:     document.getElementById('empresa').value.trim(),
             cargo:       document.getElementById('cargo').value.trim(),
             telefono:    document.getElementById('telefono').value.trim(),
             facturacion: facturacionValue,
-            leads:       document.getElementById('leads').value.trim(),
-            _subject:    'Nueva solicitud de auditoría Fase 0 — Meridian Solar Partners',
-            _captcha:    'false'
-        };
-
-        fetch('https://formsubmit.co/ajax/hola@meridiansolarpartners.com', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(payload)
-        })
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-            form.style.display = 'none';
-            success.classList.add('show');
-            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        })
-        .catch(function() {
-            // Fallback: show success anyway (formsubmit may still deliver)
-            form.style.display = 'none';
-            success.classList.add('show');
-            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            leads:       document.getElementById('leads').value.trim()
         });
+
+        fetch(SHEETS_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        }).catch(function() {});
+
+        // Marcar como enviado en este navegador
+        localStorage.setItem('msp_solicitud_enviada', '1');
+
+        setTimeout(function() {
+            form.style.display = 'none';
+            success.classList.add('show');
+            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 900);
     });
 
     /* ── ANCHOR SCROLL (custom easeInOutCubic, 90px offset, 700ms) ── */
