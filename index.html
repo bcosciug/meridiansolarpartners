@@ -1289,6 +1289,29 @@
         }
         .form-input.error, .form-select.error { border-bottom-color: #0B2545; }
 
+        .funnel-diagram {
+            grid-column: 1 / -1;
+            margin: 40px auto 0;
+            width: 100%;
+            max-width: 560px;
+        }
+        .funnel-diagram figcaption,
+        .diagram-360 figcaption {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.625rem;
+            letter-spacing: 0.1em;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .diagram-360 {
+            grid-column: 1 / -1;
+            margin: 40px auto 0;
+            width: 100%;
+            max-width: 560px;
+        }
+
         .service-cta {
             display: inline-block;
             margin-top: 32px;
@@ -1589,6 +1612,57 @@
         <h2 class="section-title fu d1">Tres fugas estructurales en el embudo de una instaladora solar.</h2>
         <p class="intro fu d2">El sector fotovoltaico español ha multiplicado su volumen de instalaciones residenciales en los últimos cinco años (informes anuales de UNEF y APPA Renovables). Ese crecimiento ha tensionado los procesos comerciales: la captación funciona, pero la conversión sufre. Los patrones observados en el sector son consistentes, y las ventas perdidas no se explican por precio ni por producto. Se explican por tres fricciones operativas concretas, reproducibles y medibles.</p>
 
+        <figure class="funnel-diagram fu d2" aria-hidden="true">
+            <svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg">
+                <!-- Stage 1: 100 leads -->
+                <line x1="40" y1="10" x2="460" y2="10" stroke="#0B2545" stroke-width="1"/>
+                <line x1="40" y1="52" x2="460" y2="52" stroke="#0B2545" stroke-width="1"/>
+                <line x1="40" y1="10" x2="40" y2="52" stroke="#0B2545" stroke-width="1"/>
+                <line x1="460" y1="10" x2="460" y2="52" stroke="#0B2545" stroke-width="1"/>
+                <text x="250" y="36" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#0B2545" letter-spacing="2">100 LEADS ENTRANTES</text>
+
+                <!-- Converge 1 -->
+                <line x1="40" y1="52" x2="95" y2="107" stroke="#C7CCD1" stroke-width="1"/>
+                <line x1="460" y1="52" x2="405" y2="107" stroke="#C7CCD1" stroke-width="1"/>
+                <text x="250" y="75" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#C7CCD1" letter-spacing="1.5">FUGA 01 · LATENCIA</text>
+                <text x="250" y="92" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" fill="#0B2545" letter-spacing="1">− 40 LEADS PERDIDOS</text>
+
+                <!-- Stage 2: 60 leads -->
+                <line x1="95" y1="107" x2="405" y2="107" stroke="#0B2545" stroke-width="1"/>
+                <line x1="95" y1="149" x2="405" y2="149" stroke="#0B2545" stroke-width="1"/>
+                <line x1="95" y1="107" x2="95" y2="149" stroke="#0B2545" stroke-width="1"/>
+                <line x1="405" y1="107" x2="405" y2="149" stroke="#0B2545" stroke-width="1"/>
+                <text x="250" y="133" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#0B2545" letter-spacing="1.5">60 LEADS · RESPUESTA EN TIEMPO</text>
+
+                <!-- Converge 2 -->
+                <line x1="95" y1="149" x2="155" y2="204" stroke="#C7CCD1" stroke-width="1"/>
+                <line x1="405" y1="149" x2="345" y2="204" stroke="#C7CCD1" stroke-width="1"/>
+                <text x="250" y="172" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#C7CCD1" letter-spacing="1.5">FUGA 02 · SEGUIMIENTO</text>
+                <text x="250" y="189" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" fill="#0B2545" letter-spacing="1">− 36 LEADS PERDIDOS</text>
+
+                <!-- Stage 3: 24 leads -->
+                <line x1="155" y1="204" x2="345" y2="204" stroke="#0B2545" stroke-width="1"/>
+                <line x1="155" y1="246" x2="345" y2="246" stroke="#0B2545" stroke-width="1"/>
+                <line x1="155" y1="204" x2="155" y2="246" stroke="#0B2545" stroke-width="1"/>
+                <line x1="345" y1="204" x2="345" y2="246" stroke="#0B2545" stroke-width="1"/>
+                <text x="250" y="230" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#0B2545" letter-spacing="1.5">24 LEADS · CON SEGUIMIENTO</text>
+
+                <!-- Converge 3 -->
+                <line x1="155" y1="246" x2="210" y2="301" stroke="#C7CCD1" stroke-width="1"/>
+                <line x1="345" y1="246" x2="290" y2="301" stroke="#C7CCD1" stroke-width="1"/>
+                <text x="250" y="267" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#C7CCD1" letter-spacing="1.5">FUGA 03 · TIEMPO COMERCIAL</text>
+                <text x="250" y="284" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" fill="#0B2545" letter-spacing="1">− 14 LEADS PERDIDOS</text>
+
+                <!-- Stage 4: ~10 cierres -->
+                <line x1="210" y1="301" x2="290" y2="301" stroke="#0B2545" stroke-width="1"/>
+                <line x1="210" y1="343" x2="290" y2="343" stroke="#0B2545" stroke-width="1"/>
+                <line x1="210" y1="301" x2="210" y2="343" stroke="#0B2545" stroke-width="1"/>
+                <line x1="290" y1="301" x2="290" y2="343" stroke="#0B2545" stroke-width="1"/>
+                <text x="250" y="326" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#0B2545" letter-spacing="1.5">~10 CIERRES</text>
+            </svg>
+            <figcaption>EMBUDO TIPO · SECTOR FOTOVOLTAICO RESIDENCIAL · ESTIMACIÓN SECTOR</figcaption>
+        </figure>
+
         <div class="findings">
             <article class="finding fu">
                 <div class="finding-num">01.1</div>
@@ -1816,6 +1890,54 @@
             <p>Modalidad recomendada para instaladoras que requieren control unificado del embudo comercial. Las tres líneas operan sobre la misma capa de datos: lo que aprende el Cierra-Citas alimenta el Rescate de Presupuestos; lo que descubre el Simulador refina la cualificación del primer contacto.</p>
             <p>Incluye revisión operativa quincenal directa con el operador, ajustes mensuales sobre las secuencias según la respuesta del mercado, y panel de gestión consolidado con los indicadores clave de las tres líneas. Modalidad retainer mensual con compromiso mínimo de tres meses — un ciclo completo de aprendizaje del sistema.</p>
         </div>
+
+        <figure class="diagram-360 fu d2" aria-hidden="true">
+            <svg viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="a360" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+                        <path d="M0,0 L5,2.5 L0,5" stroke="#C7CCD1" stroke-width="0.8" fill="none"/>
+                    </marker>
+                    <marker id="a360r" markerWidth="5" markerHeight="5" refX="1" refY="2.5" orient="auto-start-reverse">
+                        <path d="M0,0 L5,2.5 L0,5" stroke="#C7CCD1" stroke-width="0.8" fill="none"/>
+                    </marker>
+                </defs>
+
+                <!-- Node 1: Cierra-Citas (top center) -->
+                <line x1="130" y1="20" x2="350" y2="20" stroke="#0B2545" stroke-width="1"/>
+                <line x1="130" y1="62" x2="350" y2="62" stroke="#0B2545" stroke-width="1"/>
+                <line x1="130" y1="20" x2="130" y2="62" stroke="#0B2545" stroke-width="1"/>
+                <line x1="350" y1="20" x2="350" y2="62" stroke="#0B2545" stroke-width="1"/>
+                <text x="240" y="37" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#0B2545" letter-spacing="1.5">CIERRA-CITAS</text>
+                <text x="240" y="52" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#0B2545" letter-spacing="1.5">SOLAR 24/7</text>
+
+                <!-- Node 2: Rescate (bottom left) -->
+                <line x1="20" y1="208" x2="198" y2="208" stroke="#0B2545" stroke-width="1"/>
+                <line x1="20" y1="252" x2="198" y2="252" stroke="#0B2545" stroke-width="1"/>
+                <line x1="20" y1="208" x2="20" y2="252" stroke="#0B2545" stroke-width="1"/>
+                <line x1="198" y1="208" x2="198" y2="252" stroke="#0B2545" stroke-width="1"/>
+                <text x="109" y="226" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#0B2545" letter-spacing="1.5">RESCATE DE</text>
+                <text x="109" y="242" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#0B2545" letter-spacing="1.5">PRESUPUESTOS</text>
+
+                <!-- Node 3: Simulador (bottom right) -->
+                <line x1="282" y1="208" x2="460" y2="208" stroke="#0B2545" stroke-width="1"/>
+                <line x1="282" y1="252" x2="460" y2="252" stroke="#0B2545" stroke-width="1"/>
+                <line x1="282" y1="208" x2="282" y2="252" stroke="#0B2545" stroke-width="1"/>
+                <line x1="460" y1="208" x2="460" y2="252" stroke="#0B2545" stroke-width="1"/>
+                <text x="371" y="226" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#0B2545" letter-spacing="1.5">SIMULADOR</text>
+                <text x="371" y="242" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" fill="#0B2545" letter-spacing="1.5">CIERRA-VENTAS</text>
+
+                <!-- Connecting lines (bidirectional) -->
+                <line x1="224" y1="62" x2="125" y2="208" stroke="#C7CCD1" stroke-width="1" marker-start="url(#a360r)" marker-end="url(#a360)"/>
+                <line x1="257" y1="62" x2="364" y2="208" stroke="#C7CCD1" stroke-width="1" marker-start="url(#a360r)" marker-end="url(#a360)"/>
+                <line x1="198" y1="230" x2="282" y2="230" stroke="#C7CCD1" stroke-width="1" marker-start="url(#a360r)" marker-end="url(#a360)"/>
+
+                <!-- Center label -->
+                <text x="240" y="148" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#C7CCD1" letter-spacing="1.5">DATOS</text>
+                <text x="240" y="163" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" fill="#C7CCD1" letter-spacing="1.5">COMPARTIDOS</text>
+            </svg>
+            <figcaption>ARQUITECTURA DE DATOS · SISTEMA SOLAR 360 · RETROALIMENTACIÓN ENTRE LÍNEAS</figcaption>
+        </figure>
+
         <div class="service-cta-wrap fu">
             <a href="#contacto" class="service-cta">Solicitar auditoría gratuita de Fase 0</a>
         </div>
