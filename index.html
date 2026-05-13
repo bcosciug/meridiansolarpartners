@@ -1289,6 +1289,33 @@
         }
         .form-input.error, .form-select.error { border-bottom-color: #0B2545; }
 
+        .service-cta {
+            display: inline-block;
+            margin-top: 32px;
+            padding: 14px 28px;
+            border: 1px solid #0B2545;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #0B2545;
+            text-decoration: none;
+            position: relative;
+            transition: background 350ms ease, color 250ms ease;
+        }
+        .service-cta::after {
+            content: ' →';
+        }
+        .service-cta:hover {
+            background: #0B2545;
+            color: #F5F5F2;
+        }
+        .service-cta-wrap {
+            grid-column: 1 / -1;
+            margin-top: 8px;
+        }
+
         .form-submit {
             background: #0B2545;
             color: #F5F5F2;
@@ -1687,6 +1714,9 @@
                     <div class="metric-label">rango esperable de incremento en conversión a visita técnica, según benchmarks de respuesta automatizada.</div>
                 </div>
             </div>
+            <div class="service-cta-wrap fu">
+                <a href="#contacto" class="service-cta">Solicitar auditoría gratuita</a>
+            </div>
         </div>
     </div>
 
@@ -1720,6 +1750,9 @@
             <aside class="marginalia">
                 <strong>Nota del consultor —</strong> Las tres líneas son interdependientes pero no obligatorias. Recomendamos auditar el flujo actual antes de decidir el orden de implantación. Habitualmente la intervención de mayor impacto inmediato es la línea II.
             </aside>
+            <div class="service-cta-wrap fu">
+                <a href="#contacto" class="service-cta">Solicitar auditoría gratuita</a>
+            </div>
         </div>
     </div>
 
@@ -1750,6 +1783,9 @@
                     <div class="metric-label">rango esperable de incremento en cierre en primera visita, según benchmarks de materiales personalizados.</div>
                 </div>
             </div>
+            <div class="service-cta-wrap fu">
+                <a href="#contacto" class="service-cta">Solicitar auditoría gratuita</a>
+            </div>
         </div>
     </div>
 </section>
@@ -1779,6 +1815,9 @@
         <div class="prose fu d2">
             <p>Modalidad recomendada para instaladoras que requieren control unificado del embudo comercial. Las tres líneas operan sobre la misma capa de datos: lo que aprende el Cierra-Citas alimenta el Rescate de Presupuestos; lo que descubre el Simulador refina la cualificación del primer contacto.</p>
             <p>Incluye revisión operativa quincenal directa con el operador, ajustes mensuales sobre las secuencias según la respuesta del mercado, y panel de gestión consolidado con los indicadores clave de las tres líneas. Modalidad retainer mensual con compromiso mínimo de tres meses — un ciclo completo de aprendizaje del sistema.</p>
+        </div>
+        <div class="service-cta-wrap fu">
+            <a href="#contacto" class="service-cta">Solicitar auditoría gratuita de Fase 0</a>
         </div>
     </div>
 </section>
