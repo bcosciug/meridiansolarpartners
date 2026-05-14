@@ -1498,6 +1498,78 @@
         ::-webkit-scrollbar-track { background: #F5F5F2; }
         ::-webkit-scrollbar-thumb { background: #C7CCD1; }
         ::-webkit-scrollbar-thumb:hover { background: #1F2937; }
+
+        /* ── OVERSIZED SECTION NUMBER ── */
+        .section-num {
+            font-family: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+            font-weight: 400;
+            font-size: 7rem;
+            line-height: 0.88;
+            color: #C7CCD1;
+            letter-spacing: -0.04em;
+            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+            user-select: none;
+        }
+        .section-num-rule {
+            width: 80px;
+            height: 1px;
+            background: #C7CCD1;
+            margin: 28px 0;
+        }
+        .section-head {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 56px;
+        }
+        .section-head .section-title {
+            grid-column: unset;
+            font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* ── ZIGZAG: ODD (01, 05, 06·bis, 07) — LEFT cols 1–8 ── */
+        .section--odd .section-head { grid-column: 1 / 9; }
+        .section--odd .intro { grid-column: 1 / 9; }
+        #criterios.section--odd .prose { grid-column: 1 / 9; }
+
+        /* ── ZIGZAG: EVEN (02, 04, 06) — RIGHT cols 5–13 ── */
+        .section--even .section-head { grid-column: 5 / 13; }
+        .section--even .intro { grid-column: 5 / 13; }
+        #casos.section--even .prose { grid-column: 5 / 13; }
+
+        /* ── § 03 WATERMARK NUMBER ── */
+        .section-num-watermark {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+            font-weight: 400;
+            font-size: 12rem;
+            line-height: 1;
+            color: #C7CCD1;
+            opacity: 0.2;
+            letter-spacing: -0.04em;
+            font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+            pointer-events: none;
+            user-select: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+        .section--highlight > .grid { position: relative; z-index: 1; }
+
+        /* ── MOBILE: no zigzag, full-width ── */
+        @media (max-width: 768px) {
+            .section-num { font-size: 4rem; }
+            .section--odd .section-head,
+            .section--even .section-head { grid-column: 1 / -1; }
+            .section--odd .intro,
+            .section--even .intro { grid-column: 1 / -1; }
+            #casos .prose,
+            #criterios .prose { grid-column: 1 / -1; }
+            .section-num-watermark { font-size: 6rem; }
+        }
     </style>
 </head>
 <body>
@@ -1510,14 +1582,14 @@
             <span class="brand-name"><b>Meridian</b>&nbsp;<em>Solar Partners</em></span>
         </a>
         <nav class="nav-links" aria-label="Secciones del documento">
-            <a href="#diagnostico">§ 01 Diagnóstico</a>
-            <a href="#servicios">§ 02 Servicios</a>
-            <a href="#sistema-360">§ 03 Sistema 360</a>
-            <a href="#casos">§ 04 Casos</a>
-            <a href="#criterios">§ 05 Criterios</a>
-            <a href="#metodologia">§ 06 Metodología</a>
-            <a href="#faq">§ 06 bis FAQ</a>
-            <a href="#contacto">§ 07 Contacto</a>
+            <a href="#diagnostico">01 Diagnóstico</a>
+            <a href="#servicios">02 Servicios</a>
+            <a href="#sistema-360">03 Sistema 360</a>
+            <a href="#casos">04 Casos</a>
+            <a href="#criterios">05 Criterios</a>
+            <a href="#metodologia">06 Metodología</a>
+            <a href="#faq">06 bis FAQ</a>
+            <a href="#contacto">07 Contacto</a>
         </nav>
         <button class="hamburger" id="hamburger" aria-label="Abrir índice" aria-expanded="false" aria-controls="mobile-menu">
             <span></span><span></span><span></span>
@@ -1526,21 +1598,20 @@
 </header>
 
 <nav class="mobile-menu" id="mobile-menu" aria-label="Índice del documento">
-    <a href="#diagnostico">§ 01 — Diagnóstico</a>
-    <a href="#servicios">§ 02 — Líneas de servicio</a>
-    <a href="#sistema-360">§ 03 — Sistema 360</a>
-    <a href="#casos">§ 04 — Casos</a>
-    <a href="#criterios">§ 05 — Criterios</a>
-    <a href="#metodologia">§ 06 — Metodología</a>
-    <a href="#faq">§ 06 bis — Preguntas frecuentes</a>
-    <a href="#contacto">§ 07 — Iniciar un encargo</a>
+    <a href="#diagnostico">01 — Diagnóstico</a>
+    <a href="#servicios">02 — Líneas de servicio</a>
+    <a href="#sistema-360">03 — Sistema 360</a>
+    <a href="#casos">04 — Casos</a>
+    <a href="#criterios">05 — Criterios</a>
+    <a href="#metodologia">06 — Metodología</a>
+    <a href="#faq">06 bis — Preguntas frecuentes</a>
+    <a href="#contacto">07 — Iniciar un encargo</a>
 </nav>
 
 <!-- META STRIP -->
 <div class="meta-strip">
     <div class="meta-strip-inner">
-        <span>Meridian Solar Partners</span>
-        <span>Documento corporativo · Mayo 2026 · Pamplona</span>
+        <span>Meridian Solar Partners · Mayo 2026 · Pamplona</span>
     </div>
 </div>
 
@@ -1584,7 +1655,7 @@
 <!-- § 00 RESUMEN EJECUTIVO -->
 <section class="section section--exec">
     <div class="grid">
-        <div class="section-label fu">§ 00 — Resumen ejecutivo</div>
+        <div class="section-label fu">00 — Resumen ejecutivo</div>
         <div class="exec-row">
             <div class="exec-cell fu">
                 <span class="exec-label">01 / Latencia</span>
@@ -1606,11 +1677,14 @@
 </section>
 
 <!-- § 01 DIAGNÓSTICO -->
-<section id="diagnostico" class="section">
+<section id="diagnostico" class="section section--odd">
     <div class="grid">
-        <div class="section-label fu">§ 01 — Diagnóstico</div>
-        <h2 class="section-title fu d1">Tres fugas estructurales en el embudo de una instaladora solar.</h2>
-        <p class="intro fu d2">El sector fotovoltaico español ha multiplicado su volumen de instalaciones residenciales en los últimos cinco años (informes anuales de UNEF y APPA Renovables). Ese crecimiento ha tensionado los procesos comerciales: la captación funciona, pero la conversión sufre. Los patrones observados en el sector son consistentes, y las ventas perdidas no se explican por precio ni por producto. Se explican por tres fricciones operativas concretas, reproducibles y medibles.</p>
+        <div class="section-head fu">
+            <div class="section-num">01</div>
+            <div class="section-num-rule"></div>
+            <h2 class="section-title">Tres fugas estructurales en el embudo de una instaladora solar.</h2>
+        </div>
+        <p class="intro fu d1">El sector fotovoltaico español ha multiplicado su volumen de instalaciones residenciales en los últimos cinco años (informes anuales de UNEF y APPA Renovables). Ese crecimiento ha tensionado los procesos comerciales: la captación funciona, pero la conversión sufre. Los patrones observados en el sector son consistentes, y las ventas perdidas no se explican por precio ni por producto. Se explican por tres fricciones operativas concretas, reproducibles y medibles.</p>
 
         <figure class="funnel-diagram fu d2" aria-hidden="true">
             <svg viewBox="0 0 500 370" xmlns="http://www.w3.org/2000/svg">
@@ -1754,11 +1828,14 @@
 </section>
 
 <!-- § 02 LÍNEAS DE SERVICIO -->
-<section id="servicios" class="section">
+<section id="servicios" class="section section--even">
     <div class="grid">
-        <div class="section-label fu">§ 02 — Líneas de servicio</div>
-        <h2 class="section-title fu d1">Tres intervenciones discretas. Aplicables por separado o integradas.</h2>
-        <p class="intro fu d2">Cada línea de servicio está diseñada para resolver una de las tres fugas identificadas en el diagnóstico. Pueden implementarse en orden o en paralelo, según el estado del proceso comercial del cliente. La integración entre las tres — modalidad Sistema 360 — apunta a resultados sustancialmente superiores frente a la implantación aislada de cada componente, por el efecto de retroalimentación entre las capas.</p>
+        <div class="section-head fu">
+            <div class="section-num">02</div>
+            <div class="section-num-rule"></div>
+            <h2 class="section-title">Tres intervenciones discretas. Aplicables por separado o integradas.</h2>
+        </div>
+        <p class="intro fu d1">Cada línea de servicio está diseñada para resolver una de las tres fugas identificadas en el diagnóstico. Pueden implementarse en orden o en paralelo, según el estado del proceso comercial del cliente. La integración entre las tres — modalidad Sistema 360 — apunta a resultados sustancialmente superiores frente a la implantación aislada de cada componente, por el efecto de retroalimentación entre las capas.</p>
     </div>
 
     <div class="service-line">
@@ -1883,8 +1960,9 @@
 <!-- § 03 SISTEMA SOLAR 360 (highlighted) -->
 <section id="sistema-360" class="section section--highlight">
     <span class="recommended-badge" aria-label="Modalidad recomendada">★ Modalidad recomendada</span>
+    <div class="section-num-watermark" aria-hidden="true">03</div>
     <div class="grid">
-        <div class="section-label fu">§ 03 — Sistema Solar 360</div>
+        <div class="section-label fu">03 — Sistema Solar 360</div>
         <h2 class="section-title fu d1">Las tres líneas integradas bajo una operación única.</h2>
         <div class="prose fu d2">
             <p>Modalidad recomendada para instaladoras que requieren control unificado del embudo comercial. Las tres líneas operan sobre la misma capa de datos: lo que aprende el Cierra-Citas alimenta el Rescate de Presupuestos; lo que descubre el Simulador refina la cualificación del primer contacto.</p>
@@ -1961,20 +2039,26 @@
 </section>
 
 <!-- § 04 CASOS -->
-<section id="casos" class="section">
+<section id="casos" class="section section--even">
     <div class="grid">
-        <div class="section-label fu">§ 04 — Casos</div>
-        <h2 class="section-title fu d1">Casos en construcción.</h2>
-        <p class="prose fu d2">Meridian Solar Partners inicia operaciones en 2026. El primer ciclo de casos documentados — con consentimiento expreso de los clientes participantes — estará disponible a partir del cuarto trimestre. Hasta entonces, las decisiones de contratación deben apoyarse en la propuesta técnica detallada que se entrega tras la auditoría de Fase 0.</p>
+        <div class="section-head fu">
+            <div class="section-num">04</div>
+            <div class="section-num-rule"></div>
+            <h2 class="section-title">Casos en construcción.</h2>
+        </div>
+        <p class="prose fu d1">Meridian Solar Partners inicia operaciones en 2026. El primer ciclo de casos documentados — con consentimiento expreso de los clientes participantes — estará disponible a partir del cuarto trimestre. Hasta entonces, las decisiones de contratación deben apoyarse en la propuesta técnica detallada que se entrega tras la auditoría de Fase 0.</p>
     </div>
 </section>
 
 <!-- § 05 CRITERIOS -->
-<section id="criterios" class="section">
+<section id="criterios" class="section section--odd">
     <div class="grid">
-        <div class="section-label fu">§ 05 — Criterios</div>
-        <h2 class="section-title fu d1">Para qué tipo de instaladora aporta más valor.</h2>
-        <p class="prose fu d2">El sistema produce más impacto medible cuanto más maduro es el proceso comercial existente, pero no exige umbrales mínimos de tamaño ni facturación. Funciona bien en instaladoras pequeñas con un equipo comercial activo, en empresas medianas con CRM ya implantado, y en operaciones más grandes con flujo de leads sostenido. La forma rápida de comprobar si encaja en su caso concreto es la auditoría de Fase 0 — noventa minutos, sin coste, sin compromiso. Si tras la auditoría el resultado es que su situación no se beneficiaría de esta intervención, se le dirá explícitamente.</p>
+        <div class="section-head fu">
+            <div class="section-num">05</div>
+            <div class="section-num-rule"></div>
+            <h2 class="section-title">Para qué tipo de instaladora aporta más valor.</h2>
+        </div>
+        <p class="prose fu d1">El sistema produce más impacto medible cuanto más maduro es el proceso comercial existente, pero no exige umbrales mínimos de tamaño ni facturación. Funciona bien en instaladoras pequeñas con un equipo comercial activo, en empresas medianas con CRM ya implantado, y en operaciones más grandes con flujo de leads sostenido. La forma rápida de comprobar si encaja en su caso concreto es la auditoría de Fase 0 — noventa minutos, sin coste, sin compromiso. Si tras la auditoría el resultado es que su situación no se beneficiaría de esta intervención, se le dirá explícitamente.</p>
     </div>
 </section>
 
@@ -1995,10 +2079,13 @@
 </section>
 
 <!-- § 06 METODOLOGÍA -->
-<section id="metodologia" class="section">
+<section id="metodologia" class="section section--even">
     <div class="grid">
-        <div class="section-label fu">§ 06 — Metodología</div>
-        <h2 class="section-title fu d1">Tres fases. Sin compromiso hasta el final de la primera.</h2>
+        <div class="section-head fu">
+            <div class="section-num">06</div>
+            <div class="section-num-rule"></div>
+            <h2 class="section-title">Tres fases. Sin compromiso hasta el final de la primera.</h2>
+        </div>
     </div>
 
     <div class="timeline-wrap">
@@ -2043,10 +2130,13 @@
 </section>
 
 <!-- § 06 BIS PREGUNTAS FRECUENTES -->
-<section id="faq" class="section">
+<section id="faq" class="section section--odd">
     <div class="grid">
-        <div class="section-label fu">§ 06 bis · Preguntas frecuentes</div>
-        <h2 class="section-title fu d1">Lo que se pregunta antes de iniciar un encargo.</h2>
+        <div class="section-head fu">
+            <div class="section-num">06 bis</div>
+            <div class="section-num-rule"></div>
+            <h2 class="section-title">Lo que se pregunta antes de iniciar un encargo.</h2>
+        </div>
         <div class="faq-list">
             <div class="faq-item fu">
                 <h3 class="faq-q">¿Qué pasa con los datos de mi CRM?</h3>
@@ -2077,11 +2167,14 @@
 </section>
 
 <!-- § 07 CONTACTO -->
-<section id="contacto" class="section">
+<section id="contacto" class="section section--odd">
     <div class="grid">
-        <div class="section-label fu">§ 07 — Iniciar un encargo</div>
-        <h2 class="section-title fu d1">Solicitar la auditoría de Fase 0.</h2>
-        <p class="intro fu d2">Las solicitudes se responden en menos de veinticuatro horas hábiles. La primera conversación es con un partner, no con un comercial. Si su caso no encaja en nuestro alcance, se lo comunicaremos en esa misma conversación.</p>
+        <div class="section-head fu">
+            <div class="section-num">07</div>
+            <div class="section-num-rule"></div>
+            <h2 class="section-title">Solicitar la auditoría de Fase 0.</h2>
+        </div>
+        <p class="intro fu d1">Las solicitudes se responden en menos de veinticuatro horas hábiles. La primera conversación es con un partner, no con un comercial. Si su caso no encaja en nuestro alcance, se lo comunicaremos en esa misma conversación.</p>
 
         <form class="lead-form fu" id="lead-form" novalidate>
             <div class="form-grid">
@@ -2155,7 +2248,7 @@
         <div class="footer-col">
             <h4 class="footer-h">Contacto</h4>
             <ul>
-                <li><a href="#contacto">Formulario en § 07</a></li>
+                <li><a href="#contacto">Formulario en 07</a></li>
                 <li><a href="mailto:hola@meridiansolarpartners.com">hola@meridiansolarpartners.com</a></li>
             </ul>
         </div>
